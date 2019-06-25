@@ -2,7 +2,8 @@
 {
     using Microsoft.AspNetCore.Identity;
 
-    public class Role : IdentityRole
+    public class ApplicationUser
     {
+        public string MyProperty { get; set; }
     }
 }
