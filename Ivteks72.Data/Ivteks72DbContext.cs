@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using System;
 
-    public class Ivteks72DbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class Ivteks72DbContext : IdentityDbContext<ApplicationUser>
     {
         public Ivteks72DbContext(DbContextOptions<Ivteks72DbContext> options) : base(options)
         {}
