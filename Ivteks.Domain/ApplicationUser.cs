@@ -11,7 +11,9 @@
             this.Invoices = new HashSet<Invoice>();
         }
 
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public string CompanyId { get; set; }
         public Company Company { get; set; }
