@@ -15,7 +15,7 @@ namespace Ivteks72.App.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
