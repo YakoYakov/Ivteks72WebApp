@@ -10,7 +10,10 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using Ivteks72.Data;
-    using Ivteks72.Service.Sender;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Ivteks72.App.Services;
+    using Ivteks72.Domain;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -33,11 +36,30 @@
             services.AddDbContext<Ivteks72DbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<Ivteks72DbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<ISender, EmailSender>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+
+                options.User.RequireUniqueEmail = true;
+            });
+
+            //services.AddDefaultIdentity<IdentityUser>(config =>
+            //{
+            //    config.SignIn.RequireConfirmedEmail = true;
+            //});
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
