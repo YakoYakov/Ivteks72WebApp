@@ -24,6 +24,12 @@
                .Property(invoiceSub => invoiceSub.InvoiceSubTotal)
                .HasColumnType("decimal(18,2)");
 
+            builder.Entity<Order>()
+                .HasOne(c => c.Clothing)
+                .WithMany(o => o.Orders)
+                .HasForeignKey(c => c.ClothingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
     }

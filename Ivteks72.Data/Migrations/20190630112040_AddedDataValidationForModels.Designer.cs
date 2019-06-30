@@ -4,14 +4,16 @@ using Ivteks72.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ivteks72.Data.Migrations
 {
     [DbContext(typeof(Ivteks72DbContext))]
-    partial class Ivteks72DbContextModelSnapshot : ModelSnapshot
+    [Migration("20190630112040_AddedDataValidationForModels")]
+    partial class AddedDataValidationForModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,7 +326,7 @@ namespace Ivteks72.Data.Migrations
                     b.HasOne("Ivteks72.Domain.Clothing", "Clothing")
                         .WithMany("Orders")
                         .HasForeignKey("ClothingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Ivteks72.Domain.ApplicationUser", "Issuer")
                         .WithMany("Orders")

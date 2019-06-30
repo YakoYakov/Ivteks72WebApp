@@ -4,14 +4,16 @@ using Ivteks72.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ivteks72.Data.Migrations
 {
     [DbContext(typeof(Ivteks72DbContext))]
-    partial class Ivteks72DbContextModelSnapshot : ModelSnapshot
+    [Migration("20190630113323_AddedConstrainsOnTheOnDeleteBehavior")]
+    partial class AddedConstrainsOnTheOnDeleteBehavior
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,17 +308,17 @@ namespace Ivteks72.Data.Migrations
                     b.HasOne("Ivteks72.Domain.ApplicationUser", "BilledTo")
                         .WithMany("Invoices")
                         .HasForeignKey("BIlledToId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Ivteks72.Domain.Clothing", "Clothing")
                         .WithMany()
                         .HasForeignKey("ClothingId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Ivteks72.Domain.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Ivteks72.Domain.Order", b =>
@@ -329,7 +331,7 @@ namespace Ivteks72.Data.Migrations
                     b.HasOne("Ivteks72.Domain.ApplicationUser", "Issuer")
                         .WithMany("Orders")
                         .HasForeignKey("IssuerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -374,7 +376,7 @@ namespace Ivteks72.Data.Migrations
                     b.HasOne("Ivteks72.Domain.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
