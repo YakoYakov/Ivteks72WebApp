@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ivteks.Domain\Ivteks72.Domain.csproj" />
+    <ProjectReference Include="..\Ivteks72.Common\Ivteks72.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
