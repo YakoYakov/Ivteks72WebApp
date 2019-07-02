@@ -58,6 +58,7 @@
             //    config.SignIn.RequireConfirmedEmail = true;
             //});
 
+            services.AddAuthorization();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
