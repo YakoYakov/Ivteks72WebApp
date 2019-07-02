@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.App", "Ivteks72.App\Ivteks72.App.csproj", "{E5D7DE18-F985-4D19-860D-E6D9B89844E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.App", "Ivteks72.App\Ivteks72.App.csproj", "{E5D7DE18-F985-4D19-860D-E6D9B89844E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Data", "Ivteks72.Data\Ivteks72.Data.csproj", "{48B3C1F5-2A82-43D9-861D-E4CA3C5A3636}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Data", "Ivteks72.Data\Ivteks72.Data.csproj", "{48B3C1F5-2A82-43D9-861D-E4CA3C5A3636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Domain", "Ivteks.Domain\Ivteks72.Domain.csproj", "{396BA004-8267-4FB6-87C9-C3FDBF0E7350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Domain", "Ivteks.Domain\Ivteks72.Domain.csproj", "{396BA004-8267-4FB6-87C9-C3FDBF0E7350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Service", "Ivteks72.Service\Ivteks72.Service.csproj", "{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Service", "Ivteks72.Service\Ivteks72.Service.csproj", "{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Common", "Ivteks72.Common\Ivteks72.Common.csproj", "{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
