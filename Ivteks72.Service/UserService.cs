@@ -1,6 +1,6 @@
 ﻿namespace Ivteks72.Service
 {
-    public class UserService : IUsersService
+    public class UserService : IUserService
     {
         public void CreateOrder()
         {

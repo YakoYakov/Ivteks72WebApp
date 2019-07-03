@@ -14,6 +14,7 @@
     using Ivteks72.App.Services;
     using Ivteks72.Domain;
     using Ivteks72.Data.Seeding;
+    using Ivteks72.Service;
 
     public class Startup
     {
@@ -61,6 +62,7 @@
 
             services.AddAuthorization();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IClothingService, ClothingService>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

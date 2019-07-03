@@ -7,6 +7,18 @@
 
     public class Ivteks72DbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
+        public DbSet<Clothing> Clothings { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Invoice> Invoices { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+
         public Ivteks72DbContext(DbContextOptions<Ivteks72DbContext> options) : base(options)
         {}
 
