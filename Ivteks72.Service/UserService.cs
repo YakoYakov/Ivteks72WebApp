@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ivteks72.Service
+﻿namespace Ivteks72.Service
 {
-    class UserService
+    public class UserService : IUsersService
     {
+        public void CreateOrder()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
