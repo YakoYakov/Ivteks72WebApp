@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Ivteks72.App.Models;
-
-namespace Ivteks72.App.Controllers
+﻿namespace Ivteks72.App.Controllers
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using Ivteks72.App.Models;
+
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -16,6 +12,11 @@ namespace Ivteks72.App.Controllers
         }
 
         public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }
