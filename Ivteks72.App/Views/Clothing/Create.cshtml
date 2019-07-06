@@ -13,7 +13,6 @@
     <div class="col-md-4">
         <form asp-controller="clothing" asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="file" name="photo" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -29,14 +28,14 @@
                 <input asp-for="PricePerUnit" class="form-control" />
                 <span asp-validation-for="PricePerUnit" class="text-danger"></span>
             </div>
+            <div>
+                <span class="alert-info">Upload your clothing diagram here.</span>
+                <input class="btn-outline-info" type="file" name="photo" />
+            </div>
+            <p> </p>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

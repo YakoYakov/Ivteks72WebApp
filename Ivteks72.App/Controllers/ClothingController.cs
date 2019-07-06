@@ -26,7 +26,7 @@
         {
             if (photo == null || photo.Length == 0)
             {
-                return Content("File not selected");
+                return this.View(model);
             }
 
             if (!this.ModelState.IsValid)
