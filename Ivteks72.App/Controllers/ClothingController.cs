@@ -3,6 +3,7 @@
     using Ivteks72.App.Models.Clothing;
     using Ivteks72.Service;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
@@ -21,14 +22,19 @@
         }
 
         [HttpPost]
-        public IActionResult Create(ClothingCreateViewModel model)
+        public IActionResult Create(ClothingCreateViewModel model, IFormFile photo)
         {
+            if (photo == null || photo.Length == 0)
+            {
+                return Content("File not selected");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            this.clothingService.CreateClothing(model.Name, model.Fabric, model.ClothingPatternsAndCuttingDiagram, model.PricePerUnit);
+            this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.PricePerUnit);
 
             return this.Redirect("/");
         }
