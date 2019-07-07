@@ -1,38 +1,35 @@
-﻿@model IEnumerable<Ivteks72.App.Models.Order.OrderByStatusViewModel>
+﻿@model List<Ivteks72.App.Models.Order.OrderByStatusViewModel>
 
 @{
     ViewData["Title"] = "Pending";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Pending</h1>
+    <h1 class="bg-info text-center">Your pending orders</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Clothing)
+                @Html.DisplayNameFor(model => model.First().Clothing)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                @Html.DisplayNameFor(model => model.First().Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IssuedOn)
+                @Html.DisplayNameFor(model => model.First().IssuedOn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IssuerId)
+                @Html.DisplayNameFor(model => model.First().IssuerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                @Html.DisplayNameFor(model => model.First().Company)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalOrderPrice)
+                @Html.DisplayNameFor(model => model.First().TotalOrderPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.First().Status)
             </th>
             <th></th>
         </tr>
@@ -50,21 +47,16 @@
                 @Html.DisplayFor(modelItem => item.IssuedOn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IssuerId)
+                @Html.DisplayFor(modelItem => item.IssuerName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Company)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalOrderPrice)
+                @Html.DisplayFor(modelItem => item.TotalOrderPrice)<span>$</span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

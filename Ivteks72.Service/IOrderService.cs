@@ -8,6 +8,6 @@
     {
         void CreateOrder(Clothing clothing, string issuerId);
 
-        List<Order> GetOrdersByStatus(string status);
+        List<Order> GetOrdersByStatus(OrderStatus status);
     }
 }

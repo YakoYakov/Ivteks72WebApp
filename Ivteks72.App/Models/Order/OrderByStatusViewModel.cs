@@ -10,7 +10,7 @@
 
         public DateTime IssuedOn { get; set; }
 
-        public string IssuerId { get; set; }
+        public string IssuerName { get; set; }
 
         public string Company { get; set; }
 

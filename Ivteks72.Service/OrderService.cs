@@ -2,6 +2,8 @@
 {
     using Ivteks72.Data;
     using Ivteks72.Domain;
+    using Ivteks72.Domain.Enums;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -30,10 +32,13 @@
             this.context.SaveChanges();
         }
 
-        public List<Order> GetOrdersByStatus(string status)
+        public List<Order> GetOrdersByStatus(OrderStatus status)
         {
             var orders = this.context.Orders
-                .Where(order => order.Status.ToString() == status)
+                .Where(order => order.Status == status)
+                .Include(clothing => clothing.Clothing)
+                .Include(user => user.Issuer)
+                .ThenInclude(company => company.Company)
                 .ToList();
 
             return orders;
