@@ -3,6 +3,8 @@
     using Ivteks72.Data;
     using Ivteks72.Domain;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class OrderService : IOrderService
     {
@@ -26,6 +28,15 @@
 
             this.context.Orders.Add(order);
             this.context.SaveChanges();
+        }
+
+        public List<Order> GetOrdersByStatus(string status)
+        {
+            var orders = this.context.Orders
+                .Where(order => order.Status.ToString() == status)
+                .ToList();
+
+            return orders;
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "OrderIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="align-content-center">Which of your orders you want to view?</h1>
+<p> </p>
+<div>
+    <div class="col-1">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Pending">Pending Orders</a>
+        <p> </p>
+        <a class="btn btn-primary" aasp-controller="Order" asp-action="Accepted">Accepted Orders</a>
+        <p> </p>
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Rejected">Rejected Orders</a>
+        <p> </p>
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Finished">Finished Orders</a>
+    </div>
+</div>

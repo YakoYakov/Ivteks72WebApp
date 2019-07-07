@@ -5,7 +5,7 @@
     using Ivteks72.Domain;
     using Ivteks72.Domain.Enums;
   
-    public class OrderCreateViewModel
+    public class OrderByStatusViewModel
     {
         [Required]
         public DateTime IssuedOn { get; set; }

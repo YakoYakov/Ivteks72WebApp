@@ -9,7 +9,7 @@
                 <a id="manage" class="nav-link text-dark" asp-controller="Clothing" asp-action="Create">Make Order</a>
             </li>
             <li class="nav-item">
-                <a id="manage" class="nav-link text-dark">View your orders</a>
+                <a id="manage" class="nav-link text-dark" asp-controller="Order" asp-action="OrderIndex">View your orders</a>
             </li>
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
