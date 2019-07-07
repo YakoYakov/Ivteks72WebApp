@@ -1,8 +1,10 @@
 ﻿namespace Ivteks72.Service
 {
+    using Ivteks72.Domain;
+
     public class UserService : IUserService
     {
-        public void CreateOrder()
+        public ApplicationUser GetUserById(string id)
         {
             throw new System.NotImplementedException();
         }

@@ -28,6 +28,9 @@
         [Range(typeof(decimal),"0.01", "79228162514264337593543950335")]
         public decimal PricePerUnit { get; set; }
 
+        [Range(1, int.MaxValue)]
+        public int Quantity { get; set; }
+
         public ICollection<Order> Orders { get; set; }
     }
 }
