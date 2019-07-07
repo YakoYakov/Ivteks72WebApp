@@ -64,6 +64,7 @@
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IClothingService, ClothingService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IUserService, UserService>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

@@ -15,7 +15,7 @@
             this.context = context;
         }
 
-        public void CreateClothing(string name, string fabric, IFormFile photo, decimal pricePerUnit)
+        public Clothing CreateClothing(string name, string fabric, IFormFile photo, int quantity, decimal pricePerUnit)
         {
             var stream = photo.OpenReadStream();
 
@@ -26,11 +26,14 @@
                 Fabric = fabric,
                 Name = name,
                 PricePerUnit = pricePerUnit,
+                Quantity = quantity,
                 ClothingPatternsAndCuttingDiagram = imageInByteArray
             };
 
             this.context.Clothings.Add(clothing);
             this.context.SaveChanges();
+
+            return clothing;
         }
 
         private byte[] StreamToByteArray(Stream input)

@@ -13,11 +13,14 @@
             this.context = context;
         }
 
-        public ApplicationUser GetUserById(string id)
+        public string GetUserIdByUsername(string userName)
         {
-            var userFromDb = this.context.ApplicationUsers.FirstOrDefault(user => user.Id == id);
+            var userId = this.context.ApplicationUsers
+                .Where(user => user.UserName == userName)
+                .Select(user => user.Id)
+                .FirstOrDefault();
 
-            return userFromDb;
+            return userId;
         }
     }
 }

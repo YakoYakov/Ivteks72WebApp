@@ -10,10 +10,14 @@
     public class ClothingController : Controller
     {
         private readonly IClothingService clothingService;
+        private readonly IOrderService orderService;
+        private readonly IUserService userService;
 
-        public ClothingController(IClothingService clothingService)
+        public ClothingController(IClothingService clothingService, IOrderService orderService, IUserService userService)
         {
             this.clothingService = clothingService;
+            this.orderService = orderService;
+            this.userService = userService;
         }
 
         public IActionResult Create()
@@ -34,7 +38,11 @@
                 return this.View(model);
             }
 
-            this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.PricePerUnit);
+            var clothing = this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.Quantity, model.PricePerUnit);
+
+            var userId = this.userService.GetUserIdByUsername(this.User.Identity.Name);
+
+            this.orderService.CreateOrder(clothing, userId);
 
             return this.Redirect("/");
         }

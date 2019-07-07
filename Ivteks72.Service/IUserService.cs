@@ -4,6 +4,6 @@
 
     public interface IUserService
     {
-        ApplicationUser GetUserById(string id);
+        string GetUserIdByUsername(string userName);
     }
 }
