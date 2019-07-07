@@ -48,7 +48,7 @@
                     Quantity = orderFromDb.Quantity,
                     Company = orderFromDb.Issuer.Company.Name,
                     IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Pending.ToString(),
+                    Status = OrderStatus.Accepted.ToString(),
                     IssuerName = orderFromDb.Issuer.FullName
                 };
 
@@ -78,7 +78,7 @@
                     Quantity = orderFromDb.Quantity,
                     Company = orderFromDb.Issuer.Company.Name,
                     IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Pending.ToString(),
+                    Status = OrderStatus.Rejected.ToString(),
                     IssuerName = orderFromDb.Issuer.FullName
                 };
 
@@ -108,7 +108,7 @@
                     Quantity = orderFromDb.Quantity,
                     Company = orderFromDb.Issuer.Company.Name,
                     IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Pending.ToString(),
+                    Status = OrderStatus.Finished.ToString(),
                     IssuerName = orderFromDb.Issuer.FullName
                 };
 
