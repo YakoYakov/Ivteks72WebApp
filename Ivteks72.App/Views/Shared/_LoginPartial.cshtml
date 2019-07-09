@@ -7,10 +7,13 @@
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                <a class="nav-link text-dark" asp-controller="Administrator" asp-action="AllInvoices" title="Admin">View all Invoices</a>
             </li>
             <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a class="nav-link text-dark" asp-controller="Administrator" asp-action="AllOrders" title="Admin">View all orders</a>
+            </li>
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello administrator @UserManager.GetUserName(User)!</a>
             </li>
             <li class="nav-item">
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
