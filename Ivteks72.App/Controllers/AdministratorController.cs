@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Ivteks72.App.Controllers
+﻿namespace Ivteks72.App.Controllers
 {
-    public class AdministratorController
+    using Microsoft.AspNetCore.Mvc;
+
+    public class AdministratorController : Controller
     {
     }
 }
