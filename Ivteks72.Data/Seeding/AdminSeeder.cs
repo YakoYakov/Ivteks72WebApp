@@ -32,7 +32,7 @@
 
             };
 
-            var result = await userManager.CreateAsync(administrator, "frommynephew911");
+            var result = await userManager.CreateAsync(administrator, GlobalConstants.AdministratorPassword);
 
             if (result.Succeeded)
             {
