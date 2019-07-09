@@ -1,8 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Ivteks72.Common
 @inject SignInManager<Ivteks72.Domain.ApplicationUser> SignInManager
 @inject UserManager<Ivteks72.Domain.ApplicationUser> UserManager
 
     <ul class="navbar-nav">
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>
+        }
         @if (SignInManager.IsSignedIn(User))
         {
             <li class="nav-item">
@@ -10,6 +25,9 @@
             </li>
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-controller="Order" asp-action="OrderIndex">View your orders</a>
+            </li>
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-controller="Invoice" asp-action="InvoiceIndex">View your invoices</a>
             </li>
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
