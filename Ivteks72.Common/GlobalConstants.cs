@@ -5,5 +5,7 @@
         public const string AdministratorRoleName = "Administrator";
 
         public const string AdministratorPassword = "frommynephew911";
+
+        public const decimal VAT = 20;
     }
 }

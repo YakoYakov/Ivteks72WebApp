@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Ivteks72.App.Models.Invoice.InvoiceViewModel>
+
+@{
+    ViewData["Title"] = "InvoiceIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="jumbotron justify-content-around text-center">
+        <h1 class="display-4">Invoices</h1>
+    </div>
+
+
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>
+                BIlled To
+            </th>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Company Address
+            </th>
+            <th>
+                Date Of Issue
+            </th>
+            <th>
+                For Clothing
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Invoice Sub Total
+            </th>
+            <th>
+                VAT
+            </th>
+            <th>
+                Invoice Total Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIlledToUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfIssue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClothingName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceSubTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceTotalPrice)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

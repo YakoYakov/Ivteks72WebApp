@@ -20,9 +20,4 @@
     <ProjectReference Include="..\Ivteks72.Service\Ivteks72.Service.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Views\Invoice\" />
-  </ItemGroup>
-
 </Project>
