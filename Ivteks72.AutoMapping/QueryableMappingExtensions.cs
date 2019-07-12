@@ -1,4 +1,5 @@
-﻿namespace Ivteks72.App.Services.Mapping
+﻿namespace Ivteks72.AutoMapping
+
 {
     using System;
     using System.Linq;

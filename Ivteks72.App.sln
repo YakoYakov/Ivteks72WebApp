@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Domain", "Ivteks.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Service", "Ivteks72.Service\Ivteks72.Service.csproj", "{AA3AFC77-EC45-4CB5-A093-E273861FF8EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Common", "Ivteks72.Common\Ivteks72.Common.csproj", "{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Common", "Ivteks72.Common\Ivteks72.Common.csproj", "{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.AutoMapping", "Ivteks72.AutoMapping\Ivteks72.AutoMapping.csproj", "{D3BB536A-F703-43F3-97CB-04A0198D834A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8D6B478-0A8D-406B-8D8C-D4005ADCC887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BB536A-F703-43F3-97CB-04A0198D834A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BB536A-F703-43F3-97CB-04A0198D834A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BB536A-F703-43F3-97CB-04A0198D834A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BB536A-F703-43F3-97CB-04A0198D834A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

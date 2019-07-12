@@ -1,5 +1,5 @@
-﻿namespace Ivteks72.App.Services.Mapping
-{
+﻿namespace Ivteks72.AutoMapping
+{ 
     public interface IMapTo<T>
     {
     }

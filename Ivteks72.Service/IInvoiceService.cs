@@ -7,6 +7,6 @@ namespace Ivteks72.Service
 
     public interface IInvoiceService
     {
-        List<Invoice> GetAllInovoicesByUserName(string username);
+        IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username);
     }
 }

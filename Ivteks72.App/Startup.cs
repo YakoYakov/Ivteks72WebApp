@@ -18,8 +18,8 @@
     using Ivteks72.Data.Seeding;
     using Ivteks72.Service;
     using Ivteks72.App.Services.Messaging;
-    using Ivteks72.App.Services.Mapping;
     using Ivteks72.App.Models;
+    using Ivteks72.AutoMapping;
 
     public class Startup
     {

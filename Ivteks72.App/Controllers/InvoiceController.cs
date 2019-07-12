@@ -5,8 +5,6 @@
 
     using Ivteks72.Service;
     using Ivteks72.App.Models.Invoice;
-    using System.Collections.Generic;
-    using Ivteks72.Common;
 
     [Authorize]
     public class InvoiceController : Controller
@@ -21,30 +19,10 @@
         public IActionResult InvoiceIndex()
         {
             var username = this.User.Identity.Name;
-            var invoicesFromDb = this.invoiceService.GetAllInovoicesByUserName(username);
 
-            var invoicesViewModels = new List<InvoiceViewModel>();
+            var invoiceViewModels = this.invoiceService.GetAllInovoicesByUserName<InvoiceViewModel>(username);
 
-            foreach (var invoice in invoicesFromDb)
-            {
-                var invoiceView = new InvoiceViewModel
-                {
-                    BIlledToUser = invoice.BilledTo.FullName,
-                    CompanyName = invoice.BilledTo.Company.Name,
-                    CompanyAddress = invoice.BilledTo.Company.Address,
-                    DateOfIssue = invoice.DateOfIssue,
-                    ClothingName = invoice.Clothing.Name,
-                    Quantity = invoice.Clothing.Quantity,
-                    InvoiceSubTotal = invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity,
-                    VAT = (invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) * GlobalConstants.VAT,
-                    InvoiceTotalPrice = (invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) +
-                                        ((invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) * GlobalConstants.VAT)
-                };
-
-                invoicesViewModels.Add(invoiceView);
-            }
-
-            return this.View(invoicesViewModels);
+            return this.View(invoiceViewModels);
         }
     }
 }
