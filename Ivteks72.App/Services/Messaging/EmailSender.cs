@@ -1,4 +1,4 @@
-﻿namespace Ivteks72.App.Services
+﻿namespace Ivteks72.App.Services.Messaging
 {
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.Extensions.Options;

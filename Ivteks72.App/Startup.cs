@@ -1,5 +1,7 @@
 ﻿namespace Ivteks72.App
 {
+    using System.Reflection;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -8,13 +10,16 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Identity.UI.Services;
 
     using Ivteks72.Data;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Ivteks72.App.Services;
     using Ivteks72.Domain;
     using Ivteks72.Data.Seeding;
     using Ivteks72.Service;
+    using Ivteks72.App.Services.Messaging;
+    using Ivteks72.App.Services.Mapping;
+    using Ivteks72.App.Models;
 
     public class Startup
     {
@@ -76,6 +81,8 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
