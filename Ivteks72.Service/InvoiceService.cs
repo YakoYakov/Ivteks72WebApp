@@ -6,7 +6,6 @@
     using Microsoft.EntityFrameworkCore;
 
     using Ivteks72.Data;
-    using Ivteks72.Domain;
     using Ivteks72.AutoMapping;
 
     public class InvoiceService : IInvoiceService
@@ -17,17 +16,6 @@
         {
             this.context = context;
         }
-
-        //public List<Invoice> GetAllInovoicesByUserName(string username)
-        //{
-        //    var userInvoices = this.context.Invoices
-        //        .Include(user => user.BilledTo)
-        //        .Include(clothing => clothing.Clothing)
-        //        .Where(user => user.BilledTo.UserName == username)
-        //        .ToList();
-
-        //    return userInvoices;
-        //}
 
         public IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username)
         {
