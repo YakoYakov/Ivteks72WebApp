@@ -11,25 +11,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IssuerName)
+                Issuer Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
+               Company Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClothingName)
+                Clothing Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IssuedOn)
+               IssuedOn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                Quantity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PricePerUnit)
+                Price Per Unit
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderStatus)
+                Order Status
             </th>
             <th></th>
         </tr>
@@ -53,13 +53,13 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PricePerUnit)
+                @Html.DisplayFor(modelItem => item.PricePerUnit)<span>$</span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
-                @Html.ActionLink("Change order status", "Edit", new { id = item.Id }) 
+                <span class="btn btn-dark text-danger">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
             </td>
         </tr>
 }

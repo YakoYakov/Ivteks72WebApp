@@ -35,6 +35,20 @@
             await this.context.SaveChangesAsync();
         }
 
+        public async Task EditOrderStatus(string id, string status)
+        {
+            var orderToEdit = this.context.Orders.Find(id);
+
+            OrderStatus newStatus;
+
+            Enum.TryParse(status, out newStatus);
+
+            orderToEdit.Status = newStatus;
+
+            this.context.Orders.Update(orderToEdit);
+            await this.context.SaveChangesAsync();
+        }
+
         public List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>()
         {
             var adminOrderViewModels = this.context.Orders

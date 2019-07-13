@@ -6,6 +6,7 @@
     using Ivteks72.Common;
     using Ivteks72.Service;
     using Ivteks72.App.Models.Order;
+    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
@@ -27,7 +28,20 @@
 
         public IActionResult Edit(string id)
         {
-            
+            var order = this.orderService
+                .GetOrderById<AdminChangeOrderViewModel>(id);
+
+            return this.View(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, string newStatus)
+        {
+          newStatus = this.Request.Form["select"].ToString();
+
+          await this.orderService.EditOrderStatus(id, newStatus);
+
+            return this.Redirect("ViewAllOrders");
         }
     }
 }

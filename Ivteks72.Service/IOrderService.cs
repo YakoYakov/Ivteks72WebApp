@@ -15,5 +15,7 @@
         List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>();
 
         TOrderViewModel GetOrderById<TOrderViewModel>(string id);
+
+        Task EditOrderStatus(string id,string newStatus);
     }
 }
