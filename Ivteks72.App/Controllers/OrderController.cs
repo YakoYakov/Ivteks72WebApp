@@ -30,122 +30,122 @@
 
         public IActionResult Accept()
         {
-            var acceptedOrders = this.orderService.GetOrdersByStatus(OrderStatus.Accepted);
+            var acceptedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Accepted);
 
             if (acceptedOrders.Count == 0)
             {
                 return Redirect("NoOrders");
             }
 
-            var ordersView = new List<OrderByStatusViewModel>();
+            //var ordersView = new List<OrderByStatusViewModel>();
 
-            foreach (var orderFromDb in acceptedOrders)
-            {
-                var viewOrder = new OrderByStatusViewModel
-                {
-                    TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-                    Clothing = orderFromDb.Clothing.Name,
-                    Quantity = orderFromDb.Quantity,
-                    Company = orderFromDb.Issuer.Company.Name,
-                    IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Accepted.ToString(),
-                    IssuerName = orderFromDb.Issuer.FullName
-                };
+            //foreach (var orderFromDb in acceptedOrders)
+            //{
+            //    var viewOrder = new OrderByStatusViewModel
+            //    {
+            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
+            //        Clothing = orderFromDb.Clothing.Name,
+            //        Quantity = orderFromDb.Quantity,
+            //        Company = orderFromDb.Issuer.Company.Name,
+            //        IssuedOn = orderFromDb.IssuedOn,
+            //        Status = OrderStatus.Accepted.ToString(),
+            //        IssuerName = orderFromDb.Issuer.FullName
+            //    };
 
-                ordersView.Add(viewOrder);
-            }
+            //    ordersView.Add(viewOrder);
+            //}
 
-            return this.View(ordersView);
+            return this.View(acceptedOrders);
         }
 
         public IActionResult Rejected()
         {
-            var rejectedOrders = this.orderService.GetOrdersByStatus(OrderStatus.Rejected);
+            var rejectedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Rejected);
 
             if (rejectedOrders.Count == 0)
             {
                 return Redirect("NoOrders");
             }
 
-            var ordersView = new List<OrderByStatusViewModel>();
+            //var ordersView = new List<OrderByStatusViewModel>();
 
-            foreach (var orderFromDb in rejectedOrders)
-            {
-                var viewOrder = new OrderByStatusViewModel
-                {
-                    TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-                    Clothing = orderFromDb.Clothing.Name,
-                    Quantity = orderFromDb.Quantity,
-                    Company = orderFromDb.Issuer.Company.Name,
-                    IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Rejected.ToString(),
-                    IssuerName = orderFromDb.Issuer.FullName
-                };
+            //foreach (var orderFromDb in rejectedOrders)
+            //{
+            //    var viewOrder = new OrderByStatusViewModel
+            //    {
+            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
+            //        Clothing = orderFromDb.Clothing.Name,
+            //        Quantity = orderFromDb.Quantity,
+            //        Company = orderFromDb.Issuer.Company.Name,
+            //        IssuedOn = orderFromDb.IssuedOn,
+            //        Status = OrderStatus.Rejected.ToString(),
+            //        IssuerName = orderFromDb.Issuer.FullName
+            //    };
 
-                ordersView.Add(viewOrder);
-            }
+            //    ordersView.Add(viewOrder);
+            //}
 
-            return this.View(ordersView);
+            return this.View(rejectedOrders);
         }
 
         public IActionResult Finished()
         {
-            var finishedOrders = this.orderService.GetOrdersByStatus(OrderStatus.Finished);
+            var finishedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Finished);
 
             if (finishedOrders.Count == 0)
             {
                 return Redirect("NoOrders");
             }
 
-            var ordersView = new List<OrderByStatusViewModel>();
+            //var ordersView = new List<OrderByStatusViewModel>();
 
-            foreach (var orderFromDb in finishedOrders)
-            {
-                var viewOrder = new OrderByStatusViewModel
-                {
-                    TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-                    Clothing = orderFromDb.Clothing.Name,
-                    Quantity = orderFromDb.Quantity,
-                    Company = orderFromDb.Issuer.Company.Name,
-                    IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Finished.ToString(),
-                    IssuerName = orderFromDb.Issuer.FullName
-                };
+            //foreach (var orderFromDb in finishedOrders)
+            //{
+            //    var viewOrder = new OrderByStatusViewModel
+            //    {
+            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
+            //        Clothing = orderFromDb.Clothing.Name,
+            //        Quantity = orderFromDb.Quantity,
+            //        Company = orderFromDb.Issuer.Company.Name,
+            //        IssuedOn = orderFromDb.IssuedOn,
+            //        Status = OrderStatus.Finished.ToString(),
+            //        IssuerName = orderFromDb.Issuer.FullName
+            //    };
 
-                ordersView.Add(viewOrder);
-            }
+            //    ordersView.Add(viewOrder);
+            //}
 
-            return this.View(ordersView);
+            return this.View(finishedOrders);
         }
 
         public IActionResult Pending()
         {
-            var pendingOrdersFromDb = this.orderService.GetOrdersByStatus(OrderStatus.Pending);
+            var pendingOrdersFromDb = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Pending);
 
             if (pendingOrdersFromDb.Count == 0)
             {
                 return Redirect("NoOrders");
             }
 
-            var ordersView = new List<OrderByStatusViewModel>();
+            //var ordersView = new List<OrderByStatusViewModel>();
 
-            foreach (var orderFromDb in pendingOrdersFromDb)
-            {
-                var viewOrder = new OrderByStatusViewModel
-                {
-                    TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-                    Clothing = orderFromDb.Clothing.Name,
-                    Quantity = orderFromDb.Quantity,
-                    Company = orderFromDb.Issuer.Company.Name,
-                    IssuedOn = orderFromDb.IssuedOn,
-                    Status = OrderStatus.Pending.ToString(),
-                    IssuerName = orderFromDb.Issuer.FullName
-                };
+            //foreach (var orderFromDb in pendingOrdersFromDb)
+            //{
+            //    var viewOrder = new OrderByStatusViewModel
+            //    {
+            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
+            //        Clothing = orderFromDb.Clothing.Name,
+            //        Quantity = orderFromDb.Quantity,
+            //        Company = orderFromDb.Issuer.Company.Name,
+            //        IssuedOn = orderFromDb.IssuedOn,
+            //        Status = OrderStatus.Pending.ToString(),
+            //        IssuerName = orderFromDb.Issuer.FullName
+            //    };
 
-                ordersView.Add(viewOrder);
-            }
+            //    ordersView.Add(viewOrder);
+            //}
 
-            return this.View(ordersView);
+            return this.View(pendingOrdersFromDb);
         }
 
         public IActionResult ViewAll()

@@ -1,13 +1,14 @@
 ﻿namespace Ivteks72.Service
 {
-    using Ivteks72.Data;
-    using Ivteks72.Domain;
-    using Ivteks72.Domain.Enums;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
+    using Ivteks72.Data;
+    using Ivteks72.Domain;
+    using Ivteks72.Domain.Enums;
+    using Ivteks72.AutoMapping;
+    
     public class OrderService : IOrderService
     {
         private readonly Ivteks72DbContext context;
@@ -32,16 +33,14 @@
             this.context.SaveChanges();
         }
 
-        public List<Order> GetOrdersByStatus(OrderStatus status)
+        public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status)
         {
-            var orders = this.context.Orders
+            var orderViewModels = this.context.Orders
                 .Where(order => order.Status == status)
-                .Include(clothing => clothing.Clothing)
-                .Include(user => user.Issuer)
-                .ThenInclude(company => company.Company)
+                .To<TOrderViewModel>()
                 .ToList();
 
-            return orders;
+            return orderViewModels;
         }
     }
 }

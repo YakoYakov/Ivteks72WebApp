@@ -25,7 +25,7 @@
                 Company
             </th>
             <th>
-               Total Order Price
+                Total Order Price Without VAT
             </th>
             <th>
                The status of your order
@@ -37,7 +37,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Clothing)
+                @Html.DisplayFor(modelItem => item.ClothingName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
@@ -49,13 +49,13 @@
                 @Html.DisplayFor(modelItem => item.IssuerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company)
+                @Html.DisplayFor(modelItem => item.CompanyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalOrderPrice)<span>$</span>
+                @Html.DisplayFor(modelItem => item.TotalOrderPriceWithoutVAT)<span>$</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
         </tr>
 }
