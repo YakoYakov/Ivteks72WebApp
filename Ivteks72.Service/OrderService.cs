@@ -18,7 +18,7 @@
             this.context = context;
         }
 
-        public void CreateOrder(Clothing clothing, string issuerId)
+        public async void CreateOrder(Clothing clothing, string issuerId)
         {
             var order = new Order
             {
@@ -29,8 +29,8 @@
                 Status = Domain.Enums.OrderStatus.Pending
             };
 
-            this.context.Orders.Add(order);
-            this.context.SaveChanges();
+            await this.context.Orders.AddAsync(order);
+            await this.context.SaveChangesAsync();
         }
 
         public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status)
