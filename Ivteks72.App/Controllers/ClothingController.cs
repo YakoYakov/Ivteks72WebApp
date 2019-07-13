@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class ClothingController : Controller
@@ -26,7 +27,7 @@
         }
 
         [HttpPost]
-        public IActionResult Create(ClothingCreateViewModel model, IFormFile photo)
+        public async Task<IActionResult> Create(ClothingCreateViewModel model, IFormFile photo)
         {
             if (photo == null || photo.Length == 0)
             {
@@ -38,7 +39,7 @@
                 return this.View(model);
             }
 
-            var clothing = this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.Quantity, model.PricePerUnit);
+            var clothing = await this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.Quantity, model.PricePerUnit);
 
             var userId = this.userService.GetUserIdByUsername(this.User.Identity.Name);
 
