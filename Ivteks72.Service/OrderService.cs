@@ -35,10 +35,10 @@
             await this.context.SaveChangesAsync();
         }
 
-        public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status)
+        public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username)
         {
             var orderViewModels = this.context.Orders
-                .Where(order => order.Status == status)
+                .Where(order => order.Status == status && order.Issuer.UserName == username)
                 .To<TOrderViewModel>()
                 .ToList();
 

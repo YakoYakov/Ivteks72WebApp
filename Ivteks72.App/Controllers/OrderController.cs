@@ -30,7 +30,8 @@
 
         public IActionResult Accept()
         {
-            var acceptedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Accepted);
+            var acceptedOrders = this.orderService
+                .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Accepted, this.User.Identity.Name);
 
             if (acceptedOrders.Count == 0)
             {
@@ -60,7 +61,8 @@
 
         public IActionResult Rejected()
         {
-            var rejectedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Rejected);
+            var rejectedOrders = this.orderService
+                .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Rejected, this.User.Identity.Name);
 
             if (rejectedOrders.Count == 0)
             {
@@ -90,7 +92,8 @@
 
         public IActionResult Finished()
         {
-            var finishedOrders = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Finished);
+            var finishedOrders = this.orderService
+                .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Finished, this.User.Identity.Name);
 
             if (finishedOrders.Count == 0)
             {
@@ -120,7 +123,8 @@
 
         public IActionResult Pending()
         {
-            var pendingOrdersFromDb = this.orderService.GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Pending);
+            var pendingOrdersFromDb = this.orderService
+                .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Pending, this.User.Identity.Name);
 
             if (pendingOrdersFromDb.Count == 0)
             {

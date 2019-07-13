@@ -10,6 +10,6 @@
     {
         Task CreateOrder(Clothing clothing, string issuerId);
 
-        List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status);
+        List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
     }
 }
