@@ -1,10 +1,12 @@
 ﻿namespace Ivteks72.Service
 {
-    using System;
     using System.IO;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+
     using Ivteks72.Data;
     using Ivteks72.Domain;
-    using Microsoft.AspNetCore.Http;
 
     public class ClothingService : IClothingService
     {
@@ -15,7 +17,7 @@
             this.context = context;
         }
 
-        public Clothing CreateClothing(string name, string fabric, IFormFile photo, int quantity, decimal pricePerUnit)
+        public async Task<Clothing> CreateClothing(string name, string fabric, IFormFile photo, int quantity, decimal pricePerUnit)
         {
             var stream = photo.OpenReadStream();
 
@@ -30,8 +32,8 @@
                 ClothingPatternsAndCuttingDiagram = imageInByteArray
             };
 
-            this.context.Clothings.Add(clothing);
-            this.context.SaveChanges();
+            await this.context.Clothings.AddAsync(clothing);
+            await this.context.SaveChangesAsync();
 
             return clothing;
         }
