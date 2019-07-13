@@ -35,6 +35,27 @@
             await this.context.SaveChangesAsync();
         }
 
+        public List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>()
+        {
+            var adminOrderViewModels = this.context.Orders
+                .OrderBy(user => user.Issuer.UserName)
+                .ThenBy(company => company.Issuer.Company.Name)
+                .To<TOrderViewModel>()
+                .ToList();
+
+            return adminOrderViewModels;
+        }
+
+        public TOrderViewModel GetOrderById<TOrderViewModel>(string id)
+        {
+            var orderEditViewModel = this.context.Orders
+                .Where(order => order.Id == id)
+                .To<TOrderViewModel>()
+                .FirstOrDefault();
+
+            return orderEditViewModel;
+        }
+
         public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username)
         {
             var orderViewModels = this.context.Orders

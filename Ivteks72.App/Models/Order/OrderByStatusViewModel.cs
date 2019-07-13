@@ -23,14 +23,6 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            //TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-            //        Clothing = orderFromDb.Clothing.Name,
-            //        Quantity = orderFromDb.Quantity,
-            //        Company = orderFromDb.Issuer.Company.Name,
-            //        IssuedOn = orderFromDb.IssuedOn,
-            //        Status = OrderStatus.Accepted.ToString(),
-            //        IssuerName = orderFromDb.Issuer.FullName
-
             configuration.CreateMap<Order, OrderByStatusViewModel>()
                 .ForMember(x => x.TotalOrderPriceWithoutVAT,
                            opt => opt.MapFrom(x => (x.Quantity * x.Clothing.PricePerUnit)))

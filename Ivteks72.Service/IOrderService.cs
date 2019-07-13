@@ -11,5 +11,9 @@
         Task CreateOrder(Clothing clothing, string issuerId);
 
         List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
+
+        List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>();
+
+        TOrderViewModel GetOrderById<TOrderViewModel>(string id);
     }
 }
