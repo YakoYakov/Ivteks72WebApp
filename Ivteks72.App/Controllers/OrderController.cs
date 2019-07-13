@@ -38,24 +38,6 @@
                 return Redirect("NoOrders");
             }
 
-            //var ordersView = new List<OrderByStatusViewModel>();
-
-            //foreach (var orderFromDb in acceptedOrders)
-            //{
-            //    var viewOrder = new OrderByStatusViewModel
-            //    {
-            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-            //        Clothing = orderFromDb.Clothing.Name,
-            //        Quantity = orderFromDb.Quantity,
-            //        Company = orderFromDb.Issuer.Company.Name,
-            //        IssuedOn = orderFromDb.IssuedOn,
-            //        Status = OrderStatus.Accepted.ToString(),
-            //        IssuerName = orderFromDb.Issuer.FullName
-            //    };
-
-            //    ordersView.Add(viewOrder);
-            //}
-
             return this.View(acceptedOrders);
         }
 
@@ -69,24 +51,6 @@
                 return Redirect("NoOrders");
             }
 
-            //var ordersView = new List<OrderByStatusViewModel>();
-
-            //foreach (var orderFromDb in rejectedOrders)
-            //{
-            //    var viewOrder = new OrderByStatusViewModel
-            //    {
-            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-            //        Clothing = orderFromDb.Clothing.Name,
-            //        Quantity = orderFromDb.Quantity,
-            //        Company = orderFromDb.Issuer.Company.Name,
-            //        IssuedOn = orderFromDb.IssuedOn,
-            //        Status = OrderStatus.Rejected.ToString(),
-            //        IssuerName = orderFromDb.Issuer.FullName
-            //    };
-
-            //    ordersView.Add(viewOrder);
-            //}
-
             return this.View(rejectedOrders);
         }
 
@@ -98,25 +62,7 @@
             if (finishedOrders.Count == 0)
             {
                 return Redirect("NoOrders");
-            }
-
-            //var ordersView = new List<OrderByStatusViewModel>();
-
-            //foreach (var orderFromDb in finishedOrders)
-            //{
-            //    var viewOrder = new OrderByStatusViewModel
-            //    {
-            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-            //        Clothing = orderFromDb.Clothing.Name,
-            //        Quantity = orderFromDb.Quantity,
-            //        Company = orderFromDb.Issuer.Company.Name,
-            //        IssuedOn = orderFromDb.IssuedOn,
-            //        Status = OrderStatus.Finished.ToString(),
-            //        IssuerName = orderFromDb.Issuer.FullName
-            //    };
-
-            //    ordersView.Add(viewOrder);
-            //}
+            }        
 
             return this.View(finishedOrders);
         }
@@ -130,24 +76,6 @@
             {
                 return Redirect("NoOrders");
             }
-
-            //var ordersView = new List<OrderByStatusViewModel>();
-
-            //foreach (var orderFromDb in pendingOrdersFromDb)
-            //{
-            //    var viewOrder = new OrderByStatusViewModel
-            //    {
-            //        TotalOrderPrice = orderFromDb.Quantity * orderFromDb.Clothing.PricePerUnit,
-            //        Clothing = orderFromDb.Clothing.Name,
-            //        Quantity = orderFromDb.Quantity,
-            //        Company = orderFromDb.Issuer.Company.Name,
-            //        IssuedOn = orderFromDb.IssuedOn,
-            //        Status = OrderStatus.Pending.ToString(),
-            //        IssuerName = orderFromDb.Issuer.FullName
-            //    };
-
-            //    ordersView.Add(viewOrder);
-            //}
 
             return this.View(pendingOrdersFromDb);
         }
