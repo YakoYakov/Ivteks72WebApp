@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Ivteks72.Data;
     using Ivteks72.Domain;
     using Ivteks72.Domain.Enums;
     using Ivteks72.AutoMapping;
     
+
     public class OrderService : IOrderService
     {
         private readonly Ivteks72DbContext context;
@@ -18,7 +20,7 @@
             this.context = context;
         }
 
-        public async void CreateOrder(Clothing clothing, string issuerId)
+        public async Task CreateOrder(Clothing clothing, string issuerId)
         {
             var order = new Order
             {

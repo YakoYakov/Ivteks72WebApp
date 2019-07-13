@@ -43,7 +43,7 @@
 
             var userId = this.userService.GetUserIdByUsername(this.User.Identity.Name);
 
-            this.orderService.CreateOrder(clothing, userId);
+            await this.orderService.CreateOrder(clothing, userId);
 
             return this.Redirect("/");
         }

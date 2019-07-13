@@ -1,11 +1,15 @@
 ﻿namespace Ivteks72.Service
 {
-    using Ivteks72.Domain;
+
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Http;
+
+    using Ivteks72.Domain;
 
     public interface IClothingService
     {
-        Clothing CreateClothing(string name, string fabric, 
-            IFormFile clothingPatternsAndCuttingDiagram, int quantity, decimal pricePerUnit);
+        Task<Clothing> CreateClothing(string name, string fabric,
+           IFormFile clothingPatternsAndCuttingDiagram, int quantity, decimal pricePerUnit);
     }
 }
