@@ -7,6 +7,7 @@
     using Ivteks72.Service;
     using Ivteks72.App.Models.Order;
     using System.Threading.Tasks;
+    using Ivteks72.Domain.Enums;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
@@ -29,19 +30,18 @@
         public IActionResult Edit(string id)
         {
             var order = this.orderService
-                .GetOrderById<AdminChangeOrderViewModel>(id);
+                .GetOrderById<AdminChangeOrderViewModel>(id);            
 
             return this.View(order);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string newStatus)
-        {
-          newStatus = this.Request.Form["select"].ToString();
+        public async Task<IActionResult> Edit(AdminChangeOrderViewModel model)
+        {    
 
-          await this.orderService.EditOrderStatus(id, newStatus);
+          await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
 
-            return this.Redirect("ViewAllOrders");
+            return this.Redirect("/Administrator/ViewAllOrders");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿@model Ivteks72.App.Models.Order.AdminChangeOrderViewModel
+﻿@using Ivteks72.App.Models.Order
+
+@model AdminChangeOrderViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,13 +17,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OrderStatus" class="control-label">Change Order status</label>
-                <select id="select" >
-                    <option value="">--Please choose an option--</option>
-                    <option value="pending">Pending</option>
-                    <option value="accept">Accept</option>
-                    <option value="finished">Finished</option>
-                    <option value="Rejected">Rejected</option>
-                </select>
+                <select asp-for="OrderStatus" asp-items="Model.Statuses"></select>
                 <span asp-validation-for="OrderStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
