@@ -30,16 +30,20 @@
         public IActionResult Edit(string id)
         {
             var order = this.orderService
-                .GetOrderById<AdminChangeOrderViewModel>(id);            
+                .GetOrderById<AdminChangeOrderViewModel>(id);
 
             return this.View(order);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(AdminChangeOrderViewModel model)
-        {    
+        {
+            if (model.OrderStatus == GlobalConstants.MakeInvoiceValue)
+            {
 
-          await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
+            }
+
+            await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
 
             return this.Redirect("/Administrator/ViewAllOrders");
         }

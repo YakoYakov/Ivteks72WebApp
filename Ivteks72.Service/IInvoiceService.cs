@@ -2,11 +2,12 @@
 namespace Ivteks72.Service
 {
     using System.Collections.Generic;
-
-    using Ivteks72.Domain;
+    using System.Threading.Tasks;
 
     public interface IInvoiceService
     {
         IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username);
+
+        Task CreateInvoice();
     }
 }

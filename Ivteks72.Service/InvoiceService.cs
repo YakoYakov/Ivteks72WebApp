@@ -7,6 +7,9 @@
 
     using Ivteks72.Data;
     using Ivteks72.AutoMapping;
+    using System.Threading.Tasks;
+    using Ivteks72.Domain;
+    using System;
 
     public class InvoiceService : IInvoiceService
     {
@@ -15,6 +18,22 @@
         public InvoiceService(Ivteks72DbContext context)
         {
             this.context = context;
+        }
+
+        public async Task CreateInvoice(string userId, string clothingId, string orderId)
+        {
+            var invoice = new Invoice
+            {
+                BIlledToId = userId,
+                ClothingId = clothingId,
+                DateOfIssue = DateTime.UtcNow,
+                InvoiceSubTotal = 0,
+                InvoiceTotalPrice = 0,
+                OrderId = orderId
+            };
+
+            await this.context.Invoices.AddAsync(invoice);
+            await this.context.SaveChangesAsync();
         }
 
         public IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username)
