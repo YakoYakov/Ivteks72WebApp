@@ -7,6 +7,7 @@
 
     using Ivteks72.Data;
     using Ivteks72.Domain;
+    using System.Drawing;
 
     public class ClothingService : IClothingService
     {
@@ -50,6 +51,13 @@
                 }
                 return ms.ToArray();
             }
+        }
+
+        private Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
     }
 }

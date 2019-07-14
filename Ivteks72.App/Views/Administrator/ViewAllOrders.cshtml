@@ -5,22 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 div class="jumbotron justify-content-around text-center">All Orders</h1>
+<h1 div class="jumbotron justify-content-lg-between text-center">All Orders</h1>
 
-<table class="table">
+<table class="table table-striped text-center">
     <thead>
         <tr>
             <th>
                 Issuer Name
             </th>
             <th>
-               Company Name
+                Company Name
             </th>
             <th>
                 Clothing Name
             </th>
             <th>
-               IssuedOn
+                IssuedOn
             </th>
             <th>
                 Quantity
@@ -30,6 +30,12 @@
             </th>
             <th>
                 Order Status
+            </th>
+            <th>
+                Download Diagram
+            </th>
+            <th>
+                Change Status
             </th>
             <th></th>
         </tr>
@@ -59,13 +65,17 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
+                <button type="submit" asp-page-handler="DownloadFile" class="btn btn-info text-sm-center">Download</button>
+            </td>
+            @*<a href="abc.txt">Download File</a>*@
+            <td>
                 @if (item.OrderStatus == "Finished")
                 {
                     <span class="info">No action is needed!</span>
                 }
                 else
                 {
-                <span class="btn btn-dark text-danger">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
+                    <span class="btn btn-dark text-sm-center">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
                 }
             </td>
         </tr>
