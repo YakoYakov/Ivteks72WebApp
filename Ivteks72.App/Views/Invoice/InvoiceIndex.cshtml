@@ -65,13 +65,13 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceSubTotal)
+                @Html.DisplayFor(modelItem => item.InvoiceSubTotal)<span>$</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VAT)
+                @Html.DisplayFor(modelItem => item.VAT)<span>$</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceTotalPrice)
+                @Html.DisplayFor(modelItem => item.InvoiceTotalPrice)<span>$</span>
             </td>
         </tr>
 }

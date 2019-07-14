@@ -59,7 +59,14 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
+                @if (item.OrderStatus == "Finished")
+                {
+                    <span class="info">No action is needed!</span>
+                }
+                else
+                {
                 <span class="btn btn-dark text-danger">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
+                }
             </td>
         </tr>
 }

@@ -70,6 +70,13 @@
             return orderEditViewModel;
         }
 
+        public Order GetOrderFromDbById(string id)
+        {
+            var order = this.context.Orders.Find(id);
+
+            return order;
+        }
+
         public List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username)
         {
             var orderViewModels = this.context.Orders

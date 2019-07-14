@@ -17,5 +17,7 @@
         TOrderViewModel GetOrderById<TOrderViewModel>(string id);
 
         Task EditOrderStatus(string id,string newStatus);
+
+        Order GetOrderFromDbById(string id);
     }
 }

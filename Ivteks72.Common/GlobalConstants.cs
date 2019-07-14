@@ -8,6 +8,6 @@
 
         public const string MakeInvoiceValue = "Finished";
 
-        public const decimal VAT = 20;
+        public const decimal VAT = 0.2m;
     }
 }

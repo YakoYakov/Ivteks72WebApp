@@ -1,10 +1,13 @@
 ﻿namespace Ivteks72.App.Models.Invoice
 {
+    using System;
+
     using AutoMapper;
+
     using Ivteks72.AutoMapping;
     using Ivteks72.Common;
     using Ivteks72.Domain;
-    using System;
+
 
     public class InvoiceViewModel : IMapFrom<Invoice>, IHaveCustomMappings
     {
@@ -28,20 +31,16 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            //BIlledToUser = invoice.BilledTo.FullName,
-            //        CompanyName = invoice.BilledTo.Company.Name,
-            //        CompanyAddress = invoice.BilledTo.Company.Address,
-            //        DateOfIssue = invoice.DateOfIssue,
-            //        ClothingName = invoice.Clothing.Name,
-            //        Quantity = invoice.Clothing.Quantity,
-            //        InvoiceSubTotal = invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity,
-            //        VAT = (invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) * GlobalConstants.VAT,
-            //        InvoiceTotalPrice = (invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) +
-            //                            ((invoice.Clothing.PricePerUnit * invoice.Clothing.Quantity) * GlobalConstants.VAT)
 
             configuration.CreateMap<Invoice, InvoiceViewModel>()
                 .ForMember(x => x.BIlledToUser,
                            opt => opt.MapFrom(x => x.BilledTo.FullName))
+                .ForMember(x => x.CompanyName,
+                           opt => opt.MapFrom(x => x.BilledTo.Company.Name))
+                .ForMember(x => x.CompanyAddress,
+                           opt => opt.MapFrom(x => x.BilledTo.Company.Address))
+                .ForMember(x => x.Quantity,
+                           opt => opt.MapFrom(x => x.Clothing.Quantity))
                 .ForMember(x => x.InvoiceSubTotal,
                            opt => opt.MapFrom(x => (x.Clothing.PricePerUnit * x.Clothing.Quantity)))
                 .ForMember(x => x.VAT,

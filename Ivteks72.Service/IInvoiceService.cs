@@ -8,6 +8,6 @@ namespace Ivteks72.Service
     {
         IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username);
 
-        Task CreateInvoice();
+        Task CreateInvoice(string userId, string clothingId, string orderId);
     }
 }

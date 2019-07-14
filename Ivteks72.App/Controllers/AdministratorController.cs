@@ -7,16 +7,17 @@
     using Ivteks72.Service;
     using Ivteks72.App.Models.Order;
     using System.Threading.Tasks;
-    using Ivteks72.Domain.Enums;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
     {
         private readonly IOrderService orderService;
+        private readonly IInvoiceService invoiceService;
 
-        public AdministratorController(IOrderService orderService)
+        public AdministratorController(IOrderService orderService, IInvoiceService invoiceService)
         {
             this.orderService = orderService;
+            this.invoiceService = invoiceService;
         }
 
         public IActionResult ViewAllOrders()
@@ -40,7 +41,9 @@
         {
             if (model.OrderStatus == GlobalConstants.MakeInvoiceValue)
             {
+                var orderFromDb = this.orderService.GetOrderFromDbById(model.Id);
 
+                await this.invoiceService.CreateInvoice(orderFromDb.IssuerId, orderFromDb.ClothingId, orderFromDb.Id);
             }
 
             await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
