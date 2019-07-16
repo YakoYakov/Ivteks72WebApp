@@ -65,9 +65,8 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
-                <button type="submit" asp-page-handler="DownloadFile" class="btn btn-info text-sm-center">Download</button>
+                <button type="submit" asp-page-handler="" class="btn btn-info text-sm-center">Download</button>
             </td>
-            @*<a href="abc.txt">Download File</a>*@
             <td>
                 @if (item.OrderStatus == "Finished")
                 {

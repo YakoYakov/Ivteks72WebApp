@@ -1,7 +1,7 @@
 ﻿namespace Ivteks72.App.Models.Order
 {
     using System;
-
+    using System.Drawing;
     using AutoMapper;
 
     using Ivteks72.AutoMapping;
@@ -24,6 +24,8 @@
         public decimal PricePerUnit { get; set; }
 
         public string OrderStatus { get; set; }
+
+        //public Image Image { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

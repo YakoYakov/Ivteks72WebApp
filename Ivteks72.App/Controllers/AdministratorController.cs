@@ -13,17 +13,26 @@
     {
         private readonly IOrderService orderService;
         private readonly IInvoiceService invoiceService;
+        private readonly IClothingService clothingService;
 
-        public AdministratorController(IOrderService orderService, IInvoiceService invoiceService)
+        public AdministratorController(IOrderService orderService, IInvoiceService invoiceService, IClothingService clothingService)
         {
             this.orderService = orderService;
             this.invoiceService = invoiceService;
+            this.clothingService = clothingService;
         }
 
         public IActionResult ViewAllOrders()
         {
             var adminOrderAllViewModels = this.orderService
                 .GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
+
+            //foreach (var order in adminOrderAllViewModels)
+            //{
+            //    var image = this.clothingService.GetOrderImage(order.Id);
+
+            //    order.Image = image;
+            //}
 
             return this.View(adminOrderAllViewModels);
         }

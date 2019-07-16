@@ -8,6 +8,8 @@
     using Ivteks72.Data;
     using Ivteks72.Domain;
     using System.Drawing;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
 
     public class ClothingService : IClothingService
     {
@@ -39,6 +41,20 @@
             return clothing;
         }
 
+        #region
+        //public Image GetOrderImage(string orderId)
+        //{
+        //    var order = this.context.Orders
+        //        .Where(x => x.Id == orderId)
+        //        .Include(x => x.Clothing)
+        //        .FirstOrDefault();
+
+        //    var orderImage = ByteArrayToImage(order.Clothing.ClothingPatternsAndCuttingDiagram);
+
+        //    return orderImage;
+        //}
+        #endregion
+
         private byte[] StreamToByteArray(Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
@@ -53,7 +69,7 @@
             }
         }
 
-        private Image byteArrayToImage(byte[] byteArrayIn)
+        private Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
