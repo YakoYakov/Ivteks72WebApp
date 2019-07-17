@@ -4,11 +4,9 @@
     ViewData["Title"] = "Register";
 }
 
-<h1 class="text-black-50 text-center">@ViewData["Title"]</h1>
-
 <div class="row">
-    <div class="col-md-2">
-        <div style="background-color:#41aaa2; height:750px; width:440px; border-radius:30px; text-align:center;" class="col-md-offset-4">
+    <div class="col-md-2 offset-lg-3">
+        <div style="background-color:#41aaa2; height:750px; width:540px; border-radius:30px; text-align:center;" class="col-md-offset-4">
             <div class="col-sm-12" style="padding-top:10px;">
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h4>Create a new account.</h4>
@@ -53,21 +51,6 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 offset-lg-4">
-        <section>
-            <hr />
-                    <div class="col-md-offset-4 text-capitalize text-uppercase text-dark" >
-                        <p class="text-capitalize text-uppercase text-dark text-success">
-                            If you want to make orders,
-                            for a certain type of clothing you neet to register first.
-                        </p>
-                        <p>
-                            So just do it :)
-                        </p>
-                    </div>
-            <hr/>
-        </section>
     </div>
 </div>
 
