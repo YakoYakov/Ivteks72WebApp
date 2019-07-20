@@ -25,7 +25,7 @@
 
         public string OrderStatus { get; set; }
 
-        //public Image Image { get; set; }
+        public string DiagramUrl { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -37,7 +37,9 @@
                 .ForMember(x => x.PricePerUnit,
                            opt => opt.MapFrom(x => x.Clothing.PricePerUnit))
                 .ForMember(x => x.OrderStatus,
-                           opt => opt.MapFrom(x => x.Status.ToString()));
+                           opt => opt.MapFrom(x => x.Status.ToString()))
+                .ForMember(x => x.DiagramUrl,
+                           opt => opt.MapFrom(x => x.Clothing.ClothingDiagramURL));
         }
     }
 }

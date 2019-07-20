@@ -20,6 +20,7 @@
     using Ivteks72.App.Services.Messaging;
     using Ivteks72.App.Models;
     using Ivteks72.AutoMapping;
+    using CloudinaryDotNet;
 
     public class Startup
     {
@@ -41,11 +42,22 @@
             });
 
             services.AddDbContext<Ivteks72DbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+                options.UseSqlServer(
+                    Configuration["ConnectionStrings:DefaultConnection"])
+                );
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<Ivteks72DbContext>()
                 .AddDefaultTokenProviders();
+
+            Account cloudinaryCredentials = new Account(
+                this.Configuration["Cloudinary:CloudName"],
+                this.Configuration["Cloudinary:ApiKey"],
+                this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -66,11 +78,14 @@
             //});
 
             services.AddAuthorization();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IClothingService, ClothingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IInvoiceService, InvoiceService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

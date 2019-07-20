@@ -21,9 +21,6 @@
         [Required]
         [StringLength(100)]
         public string Fabric { get; set; }
-        
-        public string ClothingDiagramId { get; set; }
-        public ClothingDiagram ClothingPatternsAndCuttingDiagram { get; set; }
 
         [Required]
         [Range(typeof(decimal),"0.01", "79228162514264337593543950335")]
@@ -33,5 +30,7 @@
         public int Quantity { get; set; }
 
         public ICollection<Order> Orders { get; set; }
+
+        public string ClothingDiagramURL { get; set; }
     }
 }

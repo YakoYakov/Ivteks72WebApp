@@ -6,7 +6,6 @@
     using Microsoft.AspNetCore.Http;
 
     using Ivteks72.Domain;
-    using System.Drawing;
 
     public interface IClothingService
     {

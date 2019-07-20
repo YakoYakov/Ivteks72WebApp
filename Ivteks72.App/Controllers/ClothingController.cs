@@ -2,9 +2,11 @@
 {
     using Ivteks72.App.Models.Clothing;
     using Ivteks72.Service;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+
     using System.Threading.Tasks;
 
     [Authorize]
@@ -39,7 +41,8 @@
                 return this.View(model);
             }
 
-            var clothing = await this.clothingService.CreateClothing(model.Name, model.Fabric, photo, model.Quantity, model.PricePerUnit);
+            var clothing = await this.clothingService.CreateClothing(model.Name, model.Fabric, photo,
+                model.Quantity, model.PricePerUnit);
 
             var userId = this.userService.GetUserIdByUsername(this.User.Identity.Name);
 

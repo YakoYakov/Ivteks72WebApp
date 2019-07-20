@@ -4,14 +4,16 @@ using Ivteks72.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ivteks72.Data.Migrations
 {
     [DbContext(typeof(Ivteks72DbContext))]
-    partial class Ivteks72DbContextModelSnapshot : ModelSnapshot
+    [Migration("20190720162135_FixedErrorsWithClothingDiagramsRelations")]
+    partial class FixedErrorsWithClothingDiagramsRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

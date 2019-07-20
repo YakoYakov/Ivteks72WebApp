@@ -15,8 +15,6 @@
 
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<ClothingDiagram> Diagrams { get; set; }
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }

@@ -65,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
-                <button type="submit" asp-page-handler="" class="btn btn-info text-sm-center">Download</button>
+                <a href="@item.DiagramUrl" class="btn btn-info text-sm-center">View Clothing Diagram</a>
             </td>
             <td>
                 @if (item.OrderStatus == "Finished")
