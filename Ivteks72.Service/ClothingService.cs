@@ -32,7 +32,7 @@
                 Name = name,
                 PricePerUnit = pricePerUnit,
                 Quantity = quantity,
-                ClothingPatternsAndCuttingDiagram = imageInByteArray
+               // ClothingPatternsAndCuttingDiagram = imageInByteArray
             };
 
             await this.context.Clothings.AddAsync(clothing);
@@ -40,20 +40,6 @@
 
             return clothing;
         }
-
-        #region
-        //public Image GetOrderImage(string orderId)
-        //{
-        //    var order = this.context.Orders
-        //        .Where(x => x.Id == orderId)
-        //        .Include(x => x.Clothing)
-        //        .FirstOrDefault();
-
-        //    var orderImage = ByteArrayToImage(order.Clothing.ClothingPatternsAndCuttingDiagram);
-
-        //    return orderImage;
-        //}
-        #endregion
 
         private byte[] StreamToByteArray(Stream input)
         {
