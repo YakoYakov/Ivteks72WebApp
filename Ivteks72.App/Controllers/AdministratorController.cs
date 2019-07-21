@@ -6,7 +6,9 @@
     using Ivteks72.Common;
     using Ivteks72.Service;
     using Ivteks72.App.Models.Order;
+
     using System.Threading.Tasks;
+    using Ivteks72.App.Models.Invoice;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
@@ -26,6 +28,14 @@
                 .GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
 
             return this.View(adminOrderAllViewModels);
+        }
+
+        public IActionResult ViewAllInvoices()
+        {
+            var adminInvoiceAllViewModel = this.invoiceService
+                .GetAllInovoices<AdminAllInvoicesViewModel>();
+
+            return this.View(adminInvoiceAllViewModel);
         }
 
         public IActionResult Edit(string id)

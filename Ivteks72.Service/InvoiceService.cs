@@ -36,6 +36,17 @@
             await this.context.SaveChangesAsync();
         }
 
+        public IEnumerable<TViewModel> GetAllInovoices<TViewModel>()
+        {
+            var allInvoices = this.context.Invoices
+                .Include(user => user.BilledTo)
+                .Include(clothing => clothing.Clothing)
+                .To<TViewModel>()
+                .ToList();
+
+            return allInvoices;
+        }
+
         public IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username)
         {
             var userInvoices = this.context.Invoices
