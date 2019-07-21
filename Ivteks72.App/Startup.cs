@@ -10,17 +10,17 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.Identity.UI.Services;
 
     using Ivteks72.Data;
-    using Ivteks72.App.Services;
     using Ivteks72.Domain;
     using Ivteks72.Data.Seeding;
     using Ivteks72.Service;
-    using Ivteks72.App.Services.Messaging;
+    using Ivteks72.App.Services;
     using Ivteks72.App.Models;
     using Ivteks72.AutoMapping;
+
     using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Identity.UI.Services;
 
     public class Startup
     {
@@ -72,19 +72,14 @@
                 options.User.RequireUniqueEmail = true;
             });
 
-            //services.AddDefaultIdentity<IdentityUser>(config =>
-            //{
-            //    config.SignIn.RequireConfirmedEmail = true;
-            //});
-
             services.AddAuthorization();
 
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IClothingService, ClothingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
 

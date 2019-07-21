@@ -1,4 +1,4 @@
-﻿namespace Ivteks72.App.Services.Messaging
+﻿namespace Ivteks72.App.Services
 {
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.Extensions.Options;
@@ -13,7 +13,7 @@
             Options = optionsAccessor.Value;
         }
 
-        public AuthMessageSenderOptions Options { get; }
+        public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
@@ -25,13 +25,15 @@
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Yako@yako.com", "Yako Yakov"),
+                From = new EmailAddress("PetyrIvanov@Ivteks72.com", "Petyr Ivanov"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
             };
             msg.AddTo(new EmailAddress(email));
 
+            // Disable click tracking.
+            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
