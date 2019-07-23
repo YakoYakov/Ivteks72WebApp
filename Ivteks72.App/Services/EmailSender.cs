@@ -30,7 +30,7 @@
                 PlainTextContent = message,
                 HtmlContent = message
             };
-            msg.AddTo(new EmailAddress("yako.p.yakov@gmail.com", "Yako Yakov"));
+            msg.AddTo(new EmailAddress("yako_iv@abv.bg", "Yako Yakov"));
 
             // Disable click tracking.
             // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
