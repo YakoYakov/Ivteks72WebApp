@@ -38,7 +38,7 @@
                 return this.View(model);
             }
 
-            this.emailSender.SendEmailAsync(model.Email, model.Name, model.Massage);
+            this.emailSender.SendEmailAsync(model.Email, model.Name + " " + model.Subject, model.Massage);
 
             return this.RedirectToAction("Index");
         }

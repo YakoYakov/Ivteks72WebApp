@@ -25,12 +25,12 @@
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("PetyrIvanov@Ivteks72.com", "Petyr Ivanov"),
+                From = new EmailAddress(email),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
             };
-            msg.AddTo(new EmailAddress(email));
+            msg.AddTo(new EmailAddress("yako.p.yakov@gmail.com", "Yako Yakov"));
 
             // Disable click tracking.
             // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
