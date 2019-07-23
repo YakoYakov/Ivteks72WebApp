@@ -1,6 +1,6 @@
 ﻿namespace Ivteks72.App.Services
 {
-    public class AuthMessageSenderOptions
+    public class MessageSenderOptions
     {
         public string SendGridUser { get; set; }
 

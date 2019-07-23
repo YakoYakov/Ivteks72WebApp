@@ -81,7 +81,7 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.Configure<MessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

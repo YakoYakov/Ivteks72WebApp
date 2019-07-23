@@ -40,7 +40,7 @@
 
             this.emailSender.SendEmailAsync(model.Email, model.Name + " " + model.Subject, model.Massage);
 
-            return this.RedirectToAction("Index");
+            return Redirect("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
