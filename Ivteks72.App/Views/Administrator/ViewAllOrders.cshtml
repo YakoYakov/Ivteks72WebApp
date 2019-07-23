@@ -70,7 +70,7 @@
                     <a href="@item.DiagramUrl" class="btn btn-info text-sm-center">View Clothing Diagram</a>
                 </td>
                 <td>
-                    @if (item.OrderStatus == "Finished")
+                    @if (item.OrderStatus == "Finished" || item.OrderStatus == "Rejected")
                     {
                     <span class="info">No action is needed!</span>
                     }
