@@ -20,7 +20,7 @@
             return ContactFormEmailExecute(Options.SendGridKey, subject, message, email);
         }
 
-        public Task ContactFormEmailExecute(string apiKey, string subject, string message, string email)
+        private Task ContactFormEmailExecute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
@@ -44,12 +44,12 @@
             return ConfirmationEmailExecute(Options.SendGridKey, subject, message, email);
         }
 
-        public Task ConfirmationEmailExecute(string apiKey, string subject, string message, string email)
+        private Task ConfirmationEmailExecute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("ivteks72@ivteks72.bg", "Petyr Ivanov"),
+                From = new EmailAddress("ivteks72@ivteks72.bg", "Ivteks72"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message,
