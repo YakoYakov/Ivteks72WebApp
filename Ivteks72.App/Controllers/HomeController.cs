@@ -1,16 +1,19 @@
 ﻿namespace Ivteks72.App.Controllers
 {
     using System.Diagnostics;
+
     using Microsoft.AspNetCore.Mvc;
+
     using Ivteks72.App.Models;
     using Ivteks72.App.Models.Contact;
-    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Ivteks72.App.Services;
+    using System.Threading.Tasks;
 
     public class HomeController : Controller
     {
-        private readonly IEmailSender emailSender;
+        private readonly ISendGridEmailSender emailSender;
 
-        public HomeController(IEmailSender emailSender)
+        public HomeController(ISendGridEmailSender emailSender)
         {
             this.emailSender = emailSender;
         }
@@ -31,14 +34,14 @@
         }
 
         [HttpPost]
-        public IActionResult Contact(ContactFormModel model)
+        public async Task<IActionResult> Contact(ContactFormModel model)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            this.emailSender.SendEmailAsync(model.Email, model.Name + " " + model.Subject, model.Massage);
+            await this.emailSender.SendContactFormEmailAsync(model.Email, model.Name + " " + model.Subject, model.Massage);
 
             return Redirect("Index");
         }

@@ -80,7 +80,7 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ISendGridEmailSender, EmailSender>();
 
             services.Configure<MessageSenderOptions>(Configuration);
 
