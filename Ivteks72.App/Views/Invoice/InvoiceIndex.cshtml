@@ -1,14 +1,13 @@
-﻿@model IEnumerable<Ivteks72.App.Models.Invoice.InvoiceViewModel>
+﻿@model List<Ivteks72.App.Models.Invoice.InvoiceViewModel>
 
 @{
     ViewData["Title"] = "InvoiceIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="jumbotron justify-content-around text-center">
-        <h1 class="display-4">Invoices</h1>
-    </div>
-
+<div class="jumbotron justify-content-around text-center">
+    <h1 class="display-4">Invoices</h1>
+</div>
 
 <table class="table table-active">
     <thead>
@@ -20,60 +19,27 @@
                 Company Name
             </th>
             <th>
-                Company Address
-            </th>
-            <th>
-                Date Of Issue
-            </th>
-            <th>
                 For Clothing
             </th>
-            <th>
-                Quantity
-            </th>
-            <th>
-                Invoice Sub Total
-            </th>
-            <th>
-                VAT
-            </th>
-            <th>
-                Invoice Total Price
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BIlledToUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfIssue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClothingName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceSubTotal)<span>$</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VAT)<span>$</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceTotalPrice)<span>$</span>
-            </td>
-        </tr>
-}
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].BIlledToUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].ClothingName)
+                </td>
+                <td>
+                    <span class="btn btn-dark text-sm-center">@Html.ActionLink("Details", "InvoiceDetails", new { id = Model[i].Id }) </span>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ivteks72.App.Models.Invoice.AdminAllInvoicesViewModel>
+﻿@model List<Ivteks72.App.Models.Invoice.InvoiceViewModel>
 
 @{
     ViewData["Title"] = "ViewAllInvoices";
@@ -18,47 +18,26 @@
                 Company Name
             </th>
             <th>
-                Company Address
-            </th>
-            <th>
-                Date Of Issue
-            </th>
-            <th>
                 Clothing Name
-            </th>
-            <th>
-                Quantity
-            </th>
-            <th>
-                Invoice Total Price
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody id="myTable">
-        @foreach (var item in Model)
+        @for (int i = 0; i < Model.Count; i++)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BIlledToUser)
+                    @Html.DisplayFor(modelItem => Model[i].BIlledToUser)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
+                    @Html.DisplayFor(modelItem => Model[i].CompanyName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CompanyAddress)
+                    @Html.DisplayFor(modelItem => Model[i].ClothingName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOfIssue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClothingName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InvoiceTotalPrice)<span>$</span>
+                    <span class="btn btn-dark text-sm-center">@Html.ActionLink("Details", "InvoiceDetails", new { id = Model[i].Id }) </span>
                 </td>
             </tr>
         }

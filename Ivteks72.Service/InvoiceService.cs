@@ -58,5 +58,15 @@
 
             return userInvoices;
         }
+
+        public TViewModel GetInvoiceById<TViewModel>(string id)
+        {
+            var invoice = this.context.Invoices
+                .Where(x => x.Id == id)
+                .To<TViewModel>()
+                .FirstOrDefault();
+
+            return invoice;
+        }
     }
 }

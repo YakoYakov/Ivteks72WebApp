@@ -33,7 +33,7 @@
         public IActionResult ViewAllInvoices()
         {
             var adminInvoiceAllViewModel = this.invoiceService
-                .GetAllInovoices<AdminAllInvoicesViewModel>();
+                .GetAllInovoices<InvoiceViewModel>();
 
             return this.View(adminInvoiceAllViewModel);
         }
@@ -44,6 +44,13 @@
                 .GetOrderById<AdminChangeOrderViewModel>(id);
 
             return this.View(order);
+        }
+
+        public  IActionResult InvoiceDetails(string id)
+        {
+            var invoiceById = this.invoiceService.GetInvoiceById<InvoiceDetailsViewModel>(id);
+
+            return this.View(invoiceById);
         }
 
         [HttpPost]

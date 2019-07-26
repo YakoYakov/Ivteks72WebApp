@@ -42,6 +42,14 @@
                 .HasForeignKey(c => c.ClothingId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasSequence<int>("Invoice_seq", schema: "dbo")
+            .StartsAt(1)
+            .IncrementsBy(1);
+
+            builder.Entity<Invoice>()
+                .Property(i => i.Number)
+                .HasDefaultValueSql("NEXT VALUE FOR dbo.Order_seq");
+
             base.OnModelCreating(builder);
         }
     }

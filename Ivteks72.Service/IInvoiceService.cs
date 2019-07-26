@@ -10,6 +10,8 @@ namespace Ivteks72.Service
 
         IEnumerable<TViewModel> GetAllInovoices<TViewModel>();
 
+        TViewModel GetInvoiceById<TViewModel>(string id);
+
         Task CreateInvoice(string userId, string clothingId, string orderId);
     }
 }

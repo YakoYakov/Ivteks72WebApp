@@ -44,7 +44,7 @@
                     Configuration["ConnectionStrings:DefaultConnection"])
                 );
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(config => 
+            services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
             })

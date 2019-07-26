@@ -24,5 +24,14 @@
 
             return this.View(invoiceViewModels);
         }
+
+        public IActionResult InvoiceDetails(string id)
+        {
+            var username = this.User.Identity.Name;
+
+            var invoiceById = this.invoiceService.GetInvoiceById<InvoiceDetailsViewModel>(id);
+
+            return this.View(invoiceById);
+        }
     }
 }
