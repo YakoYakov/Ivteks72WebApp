@@ -77,7 +77,6 @@
 
             services.AddTransient<IClothingService, ClothingService>();
             services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<ISendGridEmailSender, EmailSender>();

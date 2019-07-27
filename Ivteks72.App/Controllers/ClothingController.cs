@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     [Authorize]
@@ -14,13 +14,11 @@
     {
         private readonly IClothingService clothingService;
         private readonly IOrderService orderService;
-        private readonly IUserService userService;
 
-        public ClothingController(IClothingService clothingService, IOrderService orderService, IUserService userService)
+        public ClothingController(IClothingService clothingService, IOrderService orderService)
         {
             this.clothingService = clothingService;
             this.orderService = orderService;
-            this.userService = userService;
         }
 
         public IActionResult Create()
@@ -44,7 +42,7 @@
             var clothing = await this.clothingService.CreateClothing(model.Name, model.Fabric, photo,
                 model.Quantity, model.PricePerUnit);
 
-            var userId = this.userService.GetUserIdByUsername(this.User.Identity.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             await this.orderService.CreateOrder(clothing, userId);
 
