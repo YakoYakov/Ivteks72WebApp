@@ -81,21 +81,21 @@
                                         Fabric : @Model.Fabric
                                     </div>
                                 </td>
-                                <td class="unit">$@Model.PricePerUnit</td>
+                                <td class="unit">$@Model.PricePerUnit.ToString(format:"f2")</td>
                                 <td class="qty">@Model.Quantity</td>
-                                <td class="total">$@Model.InvoiceSubTotal</td>
+                                <td class="total">$@Model.InvoiceSubTotal.ToString(format:"f2")</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="2"></td>
                                 <td colspan="2">TAX 20%</td>
-                                <td>$@Model.VAT</td>
+                                <td>$@Model.VAT.ToString(format:"f2")</td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
                                 <td colspan="2">GRAND TOTAL</td>
-                                <td>$@Model.InvoiceTotalPrice</td>
+                                <td>$@Model.InvoiceTotalPrice.ToString(format:"f2")</td>
                             </tr>
                         </tfoot>
                     </table>
