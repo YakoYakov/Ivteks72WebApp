@@ -12,6 +12,6 @@ namespace Ivteks72.Service
 
         TViewModel GetInvoiceById<TViewModel>(string id);
 
-        Task CreateInvoice(string userId, string clothingId, string orderId);
+        Task CreateInvoiceAsync(string userId, string clothingId, string orderId);
     }
 }

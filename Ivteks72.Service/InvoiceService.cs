@@ -20,7 +20,7 @@
             this.context = context;
         }
 
-        public async Task CreateInvoice(string userId, string clothingId, string orderId)
+        public async Task CreateInvoiceAsync(string userId, string clothingId, string orderId)
         {
             var invoice = new Invoice
             {

@@ -60,7 +60,7 @@
             {
                 var orderFromDb = this.orderService.GetOrderFromDbById(model.Id);
 
-                await this.invoiceService.CreateInvoice(orderFromDb.IssuerId, orderFromDb.ClothingId, orderFromDb.Id);
+                await this.invoiceService.CreateInvoiceAsync(orderFromDb.IssuerId, orderFromDb.ClothingId, orderFromDb.Id);
             }
 
             await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
