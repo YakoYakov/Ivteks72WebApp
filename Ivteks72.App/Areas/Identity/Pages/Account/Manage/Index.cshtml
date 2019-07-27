@@ -1,5 +1,10 @@
 ﻿@page
 @inject UserManager<Ivteks72.Domain.ApplicationUser> UserManager
+@inject SignInManager<Ivteks72.Domain.ApplicationUser> SignInManager
+
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
 
 @model IndexModel
 @{
@@ -13,8 +18,16 @@
 <p> </p>
 <div class="col-auto">
     <div>
-        <a class="btn btn-primary" asp-page="ChangePassword" role="button">Change Password</a>
-        <a class="btn btn-primary" asp-page="PersonalData" role="button">Personal Data</a>
+        @if (hasExternalLogins)
+        {
+            <a class="btn btn-dark text-info" asp-page="SetPassword" role="button">Set Password</a>
+            <a class="btn btn-primary" asp-page="PersonalData" role="button">Personal Data</a>
+        }
+        else
+        {
+            <a class="btn btn-primary" asp-page="ChangePassword" role="button">Change Password</a>
+            <a class="btn btn-primary" asp-page="PersonalData" role="button">Personal Data</a>
+        }
     </div>
 </div>
 
