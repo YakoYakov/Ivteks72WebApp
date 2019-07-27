@@ -18,7 +18,7 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task<Clothing> CreateClothing(string name, string fabric, IFormFile photo, int quantity, decimal pricePerUnit)
+        public async Task<Clothing> CreateClothingAsync(string name, string fabric, IFormFile photo, int quantity, decimal pricePerUnit)
         {
 
             var clothingDiagramImageURL = await this.cloudinaryService.UploadDiagramImage(photo, photo.FileName);

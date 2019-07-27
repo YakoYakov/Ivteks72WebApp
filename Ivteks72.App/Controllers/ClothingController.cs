@@ -39,12 +39,12 @@
                 return this.View(model);
             }
 
-            var clothing = await this.clothingService.CreateClothing(model.Name, model.Fabric, photo,
+            var clothing = await this.clothingService.CreateClothingAsync(model.Name, model.Fabric, photo,
                 model.Quantity, model.PricePerUnit);
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await this.orderService.CreateOrder(clothing, userId);
+            await this.orderService.CreateOrderAsync(clothing, userId);
 
             return this.Redirect("/");
         }

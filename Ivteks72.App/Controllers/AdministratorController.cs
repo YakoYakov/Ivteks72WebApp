@@ -63,7 +63,7 @@
                 await this.invoiceService.CreateInvoiceAsync(orderFromDb.IssuerId, orderFromDb.ClothingId, orderFromDb.Id);
             }
 
-            await this.orderService.EditOrderStatus(model.Id, model.OrderStatus);
+            await this.orderService.EditOrderStatusAsync(model.Id, model.OrderStatus);
 
             return this.Redirect("/Administrator/ViewAllOrders");
         }

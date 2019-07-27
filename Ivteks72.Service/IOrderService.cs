@@ -8,7 +8,7 @@
 
     public interface IOrderService
     {
-        Task CreateOrder(Clothing clothing, string issuerId);
+        Task CreateOrderAsync(Clothing clothing, string issuerId);
 
         List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
 
@@ -16,7 +16,7 @@
 
         TOrderViewModel GetOrderById<TOrderViewModel>(string id);
 
-        Task EditOrderStatus(string id,string newStatus);
+        Task EditOrderStatusAsync(string id,string newStatus);
 
         Order GetOrderFromDbById(string id);
     }

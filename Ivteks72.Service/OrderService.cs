@@ -20,7 +20,7 @@
             this.context = context;
         }
 
-        public async Task CreateOrder(Clothing clothing, string issuerId)
+        public async Task CreateOrderAsync(Clothing clothing, string issuerId)
         {
             var order = new Order
             {
@@ -35,7 +35,7 @@
             await this.context.SaveChangesAsync();
         }
 
-        public async Task EditOrderStatus(string id, string status)
+        public async Task EditOrderStatusAsync(string id, string status)
         {
             var orderToEdit = this.context.Orders.Find(id);
 

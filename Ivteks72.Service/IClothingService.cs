@@ -9,7 +9,7 @@
 
     public interface IClothingService
     {
-        Task<Clothing> CreateClothing(string name, string fabric,
+        Task<Clothing> CreateClothingAsync(string name, string fabric,
            IFormFile clothingPatternsAndCuttingDiagram, int quantity, decimal pricePerUnit);
 
         //Image GetOrderImage(string orderId);
