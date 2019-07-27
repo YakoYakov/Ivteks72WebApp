@@ -18,14 +18,14 @@
 <p> </p>
 <div class="col-auto">
     <div>
-        @if (hasExternalLogins)
+        @if (!hasExternalLogins)
         {
             <a class="btn btn-dark text-info" asp-page="SetPassword" role="button">Set Password</a>
             <a class="btn btn-primary" asp-page="PersonalData" role="button">Personal Data</a>
         }
         else
         {
-            <a class="btn btn-primary" asp-page="ChangePassword" role="button">Change Password</a>
+            <a class="btn btn-dark text-info" asp-page="ChangePassword" role="button">Change Password</a>
             <a class="btn btn-primary" asp-page="PersonalData" role="button">Personal Data</a>
         }
     </div>
