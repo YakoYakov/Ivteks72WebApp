@@ -47,12 +47,12 @@
             return allInvoices;
         }
 
-        public IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username)
+        public IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id)
         {
             var userInvoices = this.context.Invoices
                 .Include(user => user.BilledTo)
                 .Include(clothing => clothing.Clothing)
-                .Where(user => user.BilledTo.UserName == username)
+                .Where(user => user.BilledTo.Id == id)
                 .To<TViewModel>()
                 .ToList();
 

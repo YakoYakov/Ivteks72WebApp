@@ -6,7 +6,7 @@ namespace Ivteks72.Service
 
     public interface IInvoiceService
     {
-        IEnumerable<TViewModel> GetAllInovoicesByUserName<TViewModel>(string username);
+        IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id);
 
         IEnumerable<TViewModel> GetAllInovoices<TViewModel>();
 

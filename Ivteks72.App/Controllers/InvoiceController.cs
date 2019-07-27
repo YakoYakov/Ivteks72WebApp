@@ -5,6 +5,7 @@
 
     using Ivteks72.Service;
     using Ivteks72.App.Models.Invoice;
+    using System.Security.Claims;
 
     [Authorize]
     public class InvoiceController : Controller
@@ -18,17 +19,15 @@
 
         public IActionResult InvoiceIndex()
         {
-            var username = this.User.Identity.Name;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var invoiceViewModels = this.invoiceService.GetAllInovoicesByUserName<InvoiceViewModel>(username);
+            var invoiceViewModels = this.invoiceService.GetAllInovoicesByUserId<InvoiceViewModel>(userId);
 
             return this.View(invoiceViewModels);
         }
 
         public IActionResult InvoiceDetails(string id)
         {
-            var username = this.User.Identity.Name;
-
             var invoiceById = this.invoiceService.GetInvoiceById<InvoiceDetailsViewModel>(id);
 
             return this.View(invoiceById);
