@@ -5,37 +5,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-primary">Order</h1>
-
-<h4 class="text-info">Make a order for a certain type of clothing.</h4>
+<h1 class="text-primary text-center">Order</h1>
+<h4 class="text-info text-center">Make an order for a certain type of clothing.</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="clothing" asp-action="Create" method="post" enctype="multipart/form-data">
+<div class="row text-center offset-3">
+    <div class="col-md-8">
+        <form asp-controller="clothing" asp-action="Create" method="post" enctype="multipart/form-data" class="align-content-center">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Clothing Type</label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control text-center" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Fabric" class="control-label">Clothing Fabric</label>
-                <input asp-for="Fabric" class="form-control" />
+                <input asp-for="Fabric" class="form-control text-center" />
                 <span asp-validation-for="Fabric" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PricePerUnit" class="control-label"></label>
-                <input asp-for="PricePerUnit" class="form-control" />
+                <input asp-for="PricePerUnit" class="form-control text-center" />
                 <span asp-validation-for="PricePerUnit" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control text-center" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div>
-                <span class="alert-info">Upload your clothing diagram here.</span>
-                <input class="btn-outline-info" type="file" name="photo" />
+                <span class="alert-info text-dark">Upload your clothing diagram here.</span>
+                <input class="btn btn-secondary" type="file" name="photo" />
             </div>
             <p> </p>
             <div class="form-group">
