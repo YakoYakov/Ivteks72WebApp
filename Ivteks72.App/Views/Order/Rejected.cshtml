@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h1 class="bg-info text-center">Your rejected orders</h1>
+    <h1 class="jumbotron justify-content-lg-between text-center">Your rejected orders</h1>
 
-<table class="table">
+<table class="table table-striped text-center">
     <thead>
         <tr>
             <th>
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IssuedOn)
+                @item.IssuedOn.ToString("dd/MM/yyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IssuerName)
