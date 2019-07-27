@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-primary text-center">Order</h1>
-<h4 class="text-info text-center">Make an order for a certain type of clothing.</h4>
+<h1 class="text-center">Order</h1>
+<h4 class="text-center">Make an order for a certain type of clothing.</h4>
 <hr />
 <div class="row text-center offset-3">
     <div class="col-md-8">
@@ -33,12 +33,12 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div>
-                <span class="alert-info text-dark">Upload your clothing diagram here.</span>
+                <span class="text-dark">Upload your clothing diagram here.</span>
                 <input class="btn btn-secondary" type="file" name="photo" />
             </div>
             <p> </p>
             <div class="form-group">
-                <input type="submit" value="Make Order" class="btn btn-primary" />
+                <input type="submit" value="Make Order" class="btn btn-dark text-info" />
             </div>
         </form>
     </div>
