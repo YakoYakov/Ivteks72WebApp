@@ -11,18 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
 </head>
 
 <body>
 
     <div id="invoice">
 
-        @*<div class="toolbar hidden-print">
-                <div class="text-right">
-                    <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i>Print Invoice</button>
-                </div>
-                <hr>
-            </div>*@
+        <div class="toolbar hidden-print">
+            <div class="text-right">
+                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i>Print Invoice</button>
+            </div>
+            <hr>
+        </div>
         <div class="invoice overflow-auto">
             <div style="min-width: 600px">
                 <header>
@@ -112,5 +114,7 @@
             <div></div>
         </div>
     </div>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
