@@ -46,6 +46,8 @@
             return this.View(order);
         }
 
+        
+        [Route ("Invoice/InvoiceDetails")]
         public  IActionResult InvoiceDetails(string id)
         {
             var invoiceById = this.invoiceService.GetInvoiceById<InvoiceDetailsViewModel>(id);
