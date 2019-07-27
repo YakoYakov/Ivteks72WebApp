@@ -4,16 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="align-content-center">Which of your orders you want to view?</h1>
+<h2 class="text-center text-uppercase">View your orders depending on their status.</h2>
 <p> </p>
-<div>
-    <div class="col-1">
-        
-        <p> </p>
-        <a class="btn btn-primary" aasp-controller="Order" asp-action="Accept">Accepted Orders</a>
-        <p> </p>
-        <a class="btn btn-primary" asp-controller="Order" asp-action="Rejected">Rejected Orders</a>
-        <p> </p>
-        <a class="btn btn-primary" asp-controller="Order" asp-action="Finished">Finished Orders</a>
-    </div>
-</div>
+    <section class="bg-rounded contact-section bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="card py-lg-5 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">Pending Orders</h4>
+                            <hr class="my-4">
+                            <a class="btn btn-dark text-info" asp-controller="Order" asp-action="Pending">View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="card py-lg-5 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">Accepted Orders</h4>
+                            <hr class="my-4">
+                            <div class="small text-black-50">
+                                <a class="btn btn-dark text-info" asp-controller="Order" asp-action="Accept">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="card py-lg-5 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">Rejected Orders</h4>
+                            <hr class="my-4">
+                            <a class="btn btn-dark text-info" asp-controller="Order" asp-action="Rejected">View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 mb-4 mb-md-0">
+                    <div class="card py-lg-5 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">Finished Orders</h4>
+                            <hr class="my-4">
+                            <a class="btn btn-dark text-info" asp-controller="Order" asp-action="Finished">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social d-flex justify-content-center"></div>
+        </div>
+    </section>

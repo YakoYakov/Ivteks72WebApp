@@ -1361,3 +1361,55 @@ body.mobile-nav-active #mobile-nav-toggle i {
   letter-spacing: 0;
   color: #71c55d;
 }
+
+.contact-section {
+    padding: 5rem 5rem 0;
+}
+
+    .contact-section .card {
+        border: 5px;
+        border-bottom: 0.25rem solid #64a19d;
+    }
+
+        .contact-section .card h4 {
+            font-size: 0.8rem;
+            font-family: 'Varela Round';
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+        }
+
+        .contact-section .card hr {
+            border-color: #64a19d;
+            border-width: 0.25rem;
+            width: 3rem;
+        }
+
+    .contact-section .social {
+        margin-top: 4rem;
+    }
+
+        .contact-section .social a {
+            text-align: center;
+            height: 3rem;
+            width: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 100%;
+            line-height: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+            .contact-section .social a:hover {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            .contact-section .social a:active {
+                color: #fff;
+            }
+
+.bg-black {
+    background-color: #343a40 !important;
+}
+
+.bg-rounded {
+    border-radius:35px;
+}
