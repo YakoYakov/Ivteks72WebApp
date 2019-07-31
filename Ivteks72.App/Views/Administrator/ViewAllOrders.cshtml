@@ -7,7 +7,14 @@
 
     <h1 div class="jumbotron justify-content-lg-between text-center">All Orders</h1>
 
-    <input type="text" class="form-control text-primary" id="myInput" name="search" placeholder="Search..." />
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color text-center">
+                <input type="text" name="SearchString" value="@ViewData["currentFilter"]" placeholder="Search..." class="col-lg-4" />
+               |<input type="submit" value="Search" class="btn btn-dark" /> | |
+                <a asp-action="ViewAllOrders" class="btn btn-dark">Back to Full List</a>|
+        </div>
+    </form>
+    <br />
     <table class="table table-striped text-center">
         <thead>
             <tr>
@@ -55,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.ClothingName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IssuedOn)
+                    @item.IssuedOn.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)

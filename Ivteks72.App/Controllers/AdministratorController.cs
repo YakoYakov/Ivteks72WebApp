@@ -23,7 +23,7 @@
             this.invoiceService = invoiceService;
         }
 
-        public IActionResult ViewAllOrders(string sortOrder)
+        public IActionResult ViewAllOrders(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "issuerName_desc" : "";
             ViewData["CompanyNameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "companyName_desc" : "";
@@ -33,9 +33,23 @@
             ViewData["OrderStatusSortParm"] = string.IsNullOrEmpty(sortOrder) ? "orderStatus_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
+            ViewData["CurrentFilter"] = searchString;
+
             var adminOrderAllViewModels = this.orderService
                 .GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
 
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                adminOrderAllViewModels = adminOrderAllViewModels.Where(a => a.IssuerName.Contains(searchString) || 
+                       a.ClothingName.ToLower().Contains(searchString.ToLower()) ||
+                       a.CompanyName.ToLower().Contains(searchString.ToLower()) || 
+                       a.IssuedOn.ToString().ToLower().Contains(searchString.ToLower()) || 
+                       a.OrderStatus.ToString().ToLower().Contains(searchString.ToLower()) || 
+                       a.Quantity.ToString().ToLower().Contains(searchString.ToLower()) ||
+                       a.PricePerUnit.ToString().ToLower().Contains(searchString.ToLower()))
+                       .ToList();
+            }
+            
             switch (sortOrder)
             {
                 case "issuerName_desc":
