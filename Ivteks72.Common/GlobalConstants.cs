@@ -9,5 +9,7 @@
         public const string MakeInvoiceValue = "Finished";
 
         public const decimal VAT = 0.2m;
+
+        public const int DefaultPageSize = 4;
     }
 }

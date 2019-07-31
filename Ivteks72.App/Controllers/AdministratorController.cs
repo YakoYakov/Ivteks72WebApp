@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using Ivteks72.App.Models.Invoice;
     using System.Linq;
+    using Ivteks72.App.Pagination;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
@@ -23,8 +24,10 @@
             this.invoiceService = invoiceService;
         }
 
-        public IActionResult ViewAllOrders(string sortOrder, string searchString)
+        public IActionResult ViewAllOrders(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+
             ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "issuerName_desc" : "";
             ViewData["CompanyNameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "companyName_desc" : "";
             ViewData["ClothingNameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "clothingName_desc" : "";
@@ -34,6 +37,15 @@
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
             ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             var adminOrderAllViewModels = this.orderService
                 .GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
@@ -81,7 +93,9 @@
                     break;
             }
 
-            return this.View(adminOrderAllViewModels);
+            int pageSize = GlobalConstants.DefaultPageSize;
+
+            return View(PaginatedList<AdminOrderViewModel>.Create(adminOrderAllViewModels, pageNumber ?? 1, pageSize));
         }
 
         public IActionResult ViewAllInvoices(string sortOrder)

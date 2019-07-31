@@ -1,56 +1,58 @@
-﻿@model IEnumerable<Ivteks72.App.Models.Order.AdminOrderViewModel>
+﻿@using Ivteks72.App.Pagination
 
-    @{
+@model PaginatedList<Ivteks72.App.Models.Order.AdminOrderViewModel>
+
+@{
     ViewData["Title"] = "ViewAllOrders";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+}
 
-    <h1 div class="jumbotron justify-content-lg-between text-center">All Orders</h1>
+<h1 div class="jumbotron justify-content-lg-between text-center">All Orders</h1>
 
-    <form asp-action="Index" method="get">
-        <div class="form-actions no-color text-center">
-                <input type="text" name="SearchString" value="@ViewData["currentFilter"]" placeholder="Search..." class="col-lg-4" />
-               |<input type="submit" value="Search" class="btn btn-dark" /> | |
-                <a asp-action="ViewAllOrders" class="btn btn-dark">Back to Full List</a>|
-        </div>
-    </form>
-    <br />
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["NameSortParm"]">Issuer Name</a>
-                </th>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["CompanyNameSortParm"]">Company Name</a>
-                </th>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["ClothingNameSortParm"]">Clothing Name</a>
-                </th>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["DateSortParm"]">Issued On</a>
-                </th>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["QuantitySortParm"]">Quantity</a>
-                </th>
-                <th>
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["PricePerUnitSortParm"]">Price Per Unit</a>
-                </th>
-                <th> 
-                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["OrderStatusSortParm"]">Order Status</a>
-                </th>
-                <th>
-                    Download Diagram
-                </th>
-                <th>
-                    Change Status
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            @foreach (var item in Model)
-            {
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color text-center">
+        <input type="text" name="SearchString" value="@ViewData["currentFilter"]" placeholder="Search..." class="col-lg-4" />
+        |<input type="submit" value="Search" class="btn btn-dark" /> | |
+        <a asp-action="ViewAllOrders" class="btn btn-dark">Back to Full List</a>|
+    </div>
+</form>
+<br />
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Issuer Name</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["CompanyNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Company Name</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["ClothingNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Clothing Name</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Issued On</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["QuantitySortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Quantity</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["PricePerUnitSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Price Per Unit</a>
+            </th>
+            <th>
+                <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["OrderStatusSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Order Status</a>
+            </th>
+            <th>
+                Download Diagram
+            </th>
+            <th>
+                Change Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
             <tr class="order">
                 <td>
                     @Html.DisplayFor(modelItem => item.IssuerName)
@@ -79,25 +81,34 @@
                 <td>
                     @if (item.OrderStatus == "Finished" || item.OrderStatus == "Rejected")
                     {
-                    <span class="info">No action is needed!</span>
+                        <span class="info">No action is needed!</span>
                     }
                     else
                     {
-                    <span class="btn btn-dark text-sm-center">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
+                        <span class="btn btn-dark text-sm-center">@Html.ActionLink("Change order status", "Edit", new { id = item.Id }) </span>
                     }
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="ViewAllOrders"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-dark @prevDisabled">
+    Previous
+</a>
+<a asp-action="ViewAllOrders"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-dark @nextDisabled">
+    Next
+</a>
