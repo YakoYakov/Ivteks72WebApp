@@ -12,25 +12,25 @@
         <thead>
             <tr>
                 <th>
-                    Issuer Name
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["NameSortParm"]">Issuer Name</a>
                 </th>
                 <th>
-                    Company Name
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["CompanyNameSortParm"]">Company Name</a>
                 </th>
                 <th>
-                    Clothing Name
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["ClothingNameSortParm"]">Clothing Name</a>
                 </th>
                 <th>
-                    IssuedOn
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["DateSortParm"]">Issued On</a>
                 </th>
                 <th>
-                    Quantity
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["QuantitySortParm"]">Quantity</a>
                 </th>
                 <th>
-                    Price Per Unit
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["PricePerUnitSortParm"]">Price Per Unit</a>
                 </th>
-                <th>
-                    Order Status
+                <th> 
+                    <a asp-action="ViewAllOrders" asp-route-sortOrder="@ViewData["OrderStatusSortParm"]">Order Status</a>
                 </th>
                 <th>
                     Download Diagram
