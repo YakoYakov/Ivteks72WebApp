@@ -1,5 +1,4 @@
-﻿
-namespace Ivteks72.Service.Tests
+﻿namespace Ivteks72.Service.Tests
 {
     using System.Threading.Tasks;
 

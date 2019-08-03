@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Common", "Ivteks72
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.AutoMapping", "Ivteks72.AutoMapping\Ivteks72.AutoMapping.csproj", "{D3BB536A-F703-43F3-97CB-04A0198D834A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivteks72.Service.Tests", "Ivteks72.Service.Tests\Ivteks72.Service.Tests.csproj", "{74A977EB-6FEF-4B02-8210-33A02631C8ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Service.Tests", "Ivteks72.Service.Tests\Ivteks72.Service.Tests.csproj", "{74A977EB-6FEF-4B02-8210-33A02631C8ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

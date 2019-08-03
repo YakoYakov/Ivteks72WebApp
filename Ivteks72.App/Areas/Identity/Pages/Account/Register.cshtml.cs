@@ -84,7 +84,7 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Page("/Account/ConfirmationEmailSend");
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
