@@ -98,12 +98,56 @@
             return View(PaginatedList<AdminOrderViewModel>.Create(adminOrderAllViewModels, pageNumber ?? 1, pageSize));
         }
 
-        public IActionResult ViewAllInvoices(string sortOrder)
-        {       
-            var adminInvoiceAllViewModel = this.invoiceService
-                .GetAllInovoices<InvoiceViewModel>();
+        public IActionResult ViewAllInvoices(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
 
-            return this.View(adminInvoiceAllViewModel);
+            ViewData["BilledToSortParam"] = string.IsNullOrEmpty(sortOrder) ? "billedTo_desc" : "";
+            ViewData["CompanyNameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "companyName_desc" : "";
+            ViewData["ClothingNameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "clothingName_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var adminInvoiceAllViewModel = this.invoiceService
+                .GetAllInovoices<InvoiceViewModel>()
+                .ToList();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                adminInvoiceAllViewModel = adminInvoiceAllViewModel.Where(a => a.BIlledToUser.Contains(searchString) ||
+                                                            a.ClothingName.ToLower().Contains(searchString.ToLower()) ||
+                                                            a.CompanyName.ToLower().Contains(searchString.ToLower()))
+                                                            .ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "billedTo_desc":
+                    adminInvoiceAllViewModel = adminInvoiceAllViewModel.OrderByDescending(a => a.BIlledToUser).ToList();
+                    break;
+                case "companyName_desc":
+                    adminInvoiceAllViewModel = adminInvoiceAllViewModel.OrderByDescending(a => a.CompanyName).ToList();
+                    break;
+                case "clothingName_desc":
+                    adminInvoiceAllViewModel = adminInvoiceAllViewModel.OrderByDescending(a => a.ClothingName).ToList();
+                    break;
+                default:
+                    adminInvoiceAllViewModel = adminInvoiceAllViewModel.OrderBy(a => a.BIlledToUser).ToList();
+                    break;
+            }
+
+            int pageSize = GlobalConstants.DefaultPageSize;
+
+            return View(PaginatedList<InvoiceViewModel>.Create(adminInvoiceAllViewModel, pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Edit(string id)
