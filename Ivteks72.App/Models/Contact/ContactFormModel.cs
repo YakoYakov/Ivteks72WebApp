@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Ivteks72.App.Models.Contact
+﻿namespace Ivteks72.App.Models.Contact
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ContactFormModel
     {
         [Required]

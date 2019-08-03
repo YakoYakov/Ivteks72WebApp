@@ -1,15 +1,15 @@
 ﻿namespace Ivteks72.Service
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
 
     using Ivteks72.Data;
     using Ivteks72.AutoMapping;
-    using System.Threading.Tasks;
     using Ivteks72.Domain;
-    using System;
 
     public class InvoiceService : IInvoiceService
     {

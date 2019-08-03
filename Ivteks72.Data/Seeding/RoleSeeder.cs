@@ -1,14 +1,16 @@
 ﻿
 namespace Ivteks72.Data.Seeding
 {
-    using Ivteks72.Common;
-    using Ivteks72.Domain;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Ivteks72.Common;
+    using Ivteks72.Domain;
+   
     public class RoleSeeder : ISeeder
     {
         public async Task SeedAsync(Ivteks72DbContext dbContext, IServiceProvider serviceProvider)

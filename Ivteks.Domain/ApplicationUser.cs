@@ -1,9 +1,10 @@
 ﻿namespace Ivteks72.Domain
 {
-    using Microsoft.AspNetCore.Identity;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Identity;
+   
     public class ApplicationUser : IdentityUser
     {
         public ApplicationUser()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ivteks72.Domain.Enums
+﻿namespace Ivteks72.Domain.Enums
 {
     public enum OrderStatus
     {

@@ -1,14 +1,18 @@
-﻿using Ivteks72.Data;
-using Ivteks72.Domain;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System.IO;
-using System.Threading.Tasks;
-using Xunit;
-
+﻿
 namespace Ivteks72.Service.Tests
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+
+    using Ivteks72.Data;
+    using Ivteks72.Domain;
+    
+    using Moq;
+ 
+    using Xunit;
+
     public class ClothingServiceTests
     {
         [Fact]

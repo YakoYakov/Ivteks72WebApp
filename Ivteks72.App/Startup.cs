@@ -20,7 +20,6 @@
     using Ivteks72.AutoMapping;
 
     using CloudinaryDotNet;
-    using Microsoft.AspNetCore.Identity.UI.Services;
 
     public class Startup
     {

@@ -1,7 +1,9 @@
 ﻿namespace Ivteks72.App.Models.Order
 {
     using System;
+
     using AutoMapper;
+
     using Ivteks72.AutoMapping;
     using Ivteks72.Domain;
 

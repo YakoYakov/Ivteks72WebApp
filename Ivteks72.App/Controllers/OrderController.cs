@@ -1,13 +1,14 @@
 ﻿namespace Ivteks72.App.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using Ivteks72.App.Models.Order;
     using Ivteks72.App.Pagination;
     using Ivteks72.Common;
     using Ivteks72.Domain.Enums;
     using Ivteks72.Service;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
+
 
     [Authorize]
     public class OrderController : Controller
@@ -85,10 +86,5 @@
             int pageSize = GlobalConstants.DefaultPageSize;
             return this.View(PaginatedList<OrderByStatusViewModel>.Create(pendingOrders, pageNumber ?? 1, pageSize));
         }
-
-        //public IActionResult ViewAll()
-        //{
-        //    return this.View();
-        //}
     }
 }

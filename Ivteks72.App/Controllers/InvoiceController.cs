@@ -1,14 +1,15 @@
 ﻿namespace Ivteks72.App.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Ivteks72.Service;
     using Ivteks72.App.Models.Invoice;
-    using System.Security.Claims;
     using Ivteks72.Common;
     using Ivteks72.App.Pagination;
-    using System.Linq;
 
     [Authorize]
     public class InvoiceController : Controller

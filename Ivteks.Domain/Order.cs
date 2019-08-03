@@ -1,8 +1,9 @@
 ﻿namespace Ivteks72.Domain
 {
-    using Ivteks72.Domain.Enums;
     using System;
     using System.ComponentModel.DataAnnotations;
+
+    using Ivteks72.Domain.Enums;
 
     public class Order
     {

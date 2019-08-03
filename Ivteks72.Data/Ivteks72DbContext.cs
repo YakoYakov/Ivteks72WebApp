@@ -1,9 +1,9 @@
 ﻿namespace Ivteks72.Data
 {
-    using Ivteks72.Domain;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+
+    using Ivteks72.Domain;
 
     public class Ivteks72DbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

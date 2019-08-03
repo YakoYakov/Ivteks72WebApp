@@ -1,10 +1,11 @@
 ﻿namespace Ivteks72.App.Services
 {
-    using Microsoft.AspNetCore.Identity.UI.Services;
+    using System.Threading.Tasks;
+
     using Microsoft.Extensions.Options;
+
     using SendGrid;
     using SendGrid.Helpers.Mail;
-    using System.Threading.Tasks;
 
     public class EmailSender : ISendGridEmailSender
     {

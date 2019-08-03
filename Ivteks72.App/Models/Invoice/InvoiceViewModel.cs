@@ -1,6 +1,5 @@
 ﻿namespace Ivteks72.App.Models.Invoice
 {
-
     using AutoMapper;
 
     using Ivteks72.AutoMapping;

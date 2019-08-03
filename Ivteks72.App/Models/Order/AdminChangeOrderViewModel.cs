@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     using AutoMapper;
+
     using Ivteks72.AutoMapping;
     using Ivteks72.Domain;
-    using Ivteks72.Domain.Enums;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class AdminChangeOrderViewModel : IMapFrom<Order>, IHaveCustomMappings
     {

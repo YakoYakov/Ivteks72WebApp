@@ -1,13 +1,13 @@
 ﻿namespace Ivteks72.App.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
     using Ivteks72.App.Models;
     using Ivteks72.App.Models.Contact;
     using Ivteks72.App.Services;
-    using System.Threading.Tasks;
 
     public class HomeController : Controller
     {

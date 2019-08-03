@@ -1,7 +1,7 @@
 ﻿namespace Ivteks72.App.Models.Order
 {
     using System;
-    using System.Drawing;
+
     using AutoMapper;
 
     using Ivteks72.AutoMapping;

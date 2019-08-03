@@ -1,6 +1,5 @@
 ﻿namespace Ivteks72.App.Models.Clothing
 {
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
     public class ClothingCreateViewModel
