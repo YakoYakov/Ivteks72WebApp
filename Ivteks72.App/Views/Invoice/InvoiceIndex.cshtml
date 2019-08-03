@@ -1,4 +1,6 @@
-﻿@model List<Ivteks72.App.Models.Invoice.InvoiceViewModel>
+﻿@using Ivteks72.App.Pagination
+
+@model PaginatedList<Ivteks72.App.Models.Invoice.InvoiceViewModel>
 
 @{
     ViewData["Title"] = "InvoiceIndex";
@@ -42,3 +44,23 @@
         }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="ViewAllOrders"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-dark @prevDisabled">
+    Previous
+</a>
+<a asp-action="ViewAllOrders"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-dark @nextDisabled">
+    Next
+</a>

@@ -1,6 +1,8 @@
 ﻿namespace Ivteks72.App.Controllers
 {
     using Ivteks72.App.Models.Order;
+    using Ivteks72.App.Pagination;
+    using Ivteks72.Common;
     using Ivteks72.Domain.Enums;
     using Ivteks72.Service;
     using Microsoft.AspNetCore.Authorization;
@@ -28,7 +30,7 @@
             return this.View();
         }
 
-        public IActionResult Accept()
+        public IActionResult Accept(int? pageNumber)
         {
             var acceptedOrders = this.orderService
                 .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Accepted, this.User.Identity.Name);
@@ -38,10 +40,11 @@
                 return Redirect("NoOrders");
             }
 
-            return this.View(acceptedOrders);
+            int pageSize = GlobalConstants.DefaultPageSize;
+            return this.View(PaginatedList<OrderByStatusViewModel>.Create(acceptedOrders, pageNumber ?? 1, pageSize));
         }
 
-        public IActionResult Rejected()
+        public IActionResult Rejected(int? pageNumber)
         {
             var rejectedOrders = this.orderService
                 .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Rejected, this.User.Identity.Name);
@@ -51,10 +54,11 @@
                 return Redirect("NoOrders");
             }
 
-            return this.View(rejectedOrders);
+            int pageSize = GlobalConstants.DefaultPageSize;
+            return this.View(PaginatedList<OrderByStatusViewModel>.Create(rejectedOrders, pageNumber ?? 1, pageSize));
         }
 
-        public IActionResult Finished()
+        public IActionResult Finished(int? pageNumber)
         {
             var finishedOrders = this.orderService
                 .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Finished, this.User.Identity.Name);
@@ -62,27 +66,29 @@
             if (finishedOrders.Count == 0)
             {
                 return Redirect("NoOrders");
-            }        
+            }
 
-            return this.View(finishedOrders);
+            int pageSize = GlobalConstants.DefaultPageSize;
+            return this.View(PaginatedList<OrderByStatusViewModel>.Create(finishedOrders, pageNumber ?? 1, pageSize));
         }
 
-        public IActionResult Pending()
+        public IActionResult Pending(int? pageNumber)
         {
-            var pendingOrdersFromDb = this.orderService
+            var pendingOrders = this.orderService
                 .GetOrdersByStatus<OrderByStatusViewModel>(OrderStatus.Pending, this.User.Identity.Name);
 
-            if (pendingOrdersFromDb.Count == 0)
+            if (pendingOrders.Count == 0)
             {
                 return Redirect("NoOrders");
             }
 
-            return this.View(pendingOrdersFromDb);
+            int pageSize = GlobalConstants.DefaultPageSize;
+            return this.View(PaginatedList<OrderByStatusViewModel>.Create(pendingOrders, pageNumber ?? 1, pageSize));
         }
 
-        public IActionResult ViewAll()
-        {
-            return this.View();
-        }
+        //public IActionResult ViewAll()
+        //{
+        //    return this.View();
+        //}
     }
 }
