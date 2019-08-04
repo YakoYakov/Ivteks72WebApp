@@ -8,6 +8,7 @@
 
     using Ivteks72.App.Models.Invoice;
     using Ivteks72.Service.Tests.Common;
+    using Ivteks72.Domain;
 
     public class InvoiceServiceTests
     {
@@ -55,9 +56,22 @@
             Assert.Equal(invoices, actualResult);
         }
 
+        [Fact]
+        public void GetAllInvoiceByUserIdShuldReturnNullIfThereIsNoSuchUser()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            var service = new InvoiceService(context);
+
+            var fakeId = "Fake";
+            var invoiceFromDb = service.GetAllInovoicesByUserId<InvoiceViewModel>(fakeId);
+
+            var actualResult = invoiceFromDb.Select(x => x.BIlledToUser).FirstOrDefault();
+
+            Assert.Null(actualResult);
+        }
     }
 }
 
-//IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id);
+//IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id); one more test !
 //IEnumerable<TViewModel> GetAllInovoices<TViewModel>();
 //TViewModel GetInvoiceById<TViewModel>(string id);
