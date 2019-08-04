@@ -4,7 +4,7 @@
     {
         public const string AdministratorRoleName = "Administrator";
 
-        public const string AdministratorPassword = "frommynephew911";
+        
 
         public const string MakeInvoiceValue = "Finished";
 
