@@ -4,13 +4,10 @@
     using System.Linq;
     using System.Collections.Generic;
 
-    using Microsoft.EntityFrameworkCore;
-
     using Xunit;
 
     using Ivteks72.App.Models.Invoice;
     using Ivteks72.Service.Tests.Common;
-    using Ivteks72.Data;
 
     public class InvoiceServiceTests
     {
