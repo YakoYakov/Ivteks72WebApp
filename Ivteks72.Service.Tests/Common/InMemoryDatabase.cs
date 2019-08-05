@@ -1,11 +1,9 @@
-﻿using Ivteks72.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ivteks72.Service.Tests.Common
+﻿namespace Ivteks72.Service.Tests.Common
 {
+    using Ivteks72.Data;
+
+    using Microsoft.EntityFrameworkCore;
+
     class InMemoryDatabase
     {
         public static Ivteks72DbContext GetDbContext()

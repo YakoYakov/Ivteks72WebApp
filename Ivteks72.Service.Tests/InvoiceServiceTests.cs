@@ -8,10 +8,110 @@
 
     using Ivteks72.App.Models.Invoice;
     using Ivteks72.Service.Tests.Common;
+    using Microsoft.EntityFrameworkCore;
     using Ivteks72.Domain;
 
     public class InvoiceServiceTests
     {
+
+        private List<Invoice> GetTestData()
+        {
+            return new List<Invoice>()
+            {
+                new Invoice
+                {
+                   BilledTo = new ApplicationUser
+                   {
+                       Email = "SomeEmail@Email.com",
+                       Company = new Company
+                       {
+                           Name = "SomeCompanyName",
+                           Address = "SomeCompanyAddress",
+                       },
+                       FullName = "SomeFullName",
+                       UserName = "SomeUserName",
+                       PasswordHash = "qwerty",
+                   },
+                   Clothing = new Clothing
+                   {
+                        ClothingDiagramURL = "someUrl",
+                        Fabric = "Textile",
+                        Name = "ClothingName",
+                        PricePerUnit = 1m,
+                        Quantity = 1,
+                   },
+                   Order = new Order
+                   {
+                        Clothing = new Clothing
+                   {
+                        ClothingDiagramURL = "someUrl",
+                        Fabric = "Textile",
+                        Name = "ClothingName",
+                        PricePerUnit = 1m,
+                        Quantity = 1,
+                   },
+                        Issuer = new ApplicationUser{
+                       Email = "SomeEmail@Email.com",
+                       Company = new Company
+                       {
+                           Name = "SomeCompanyName",
+                           Address = "SomeCompanyAddress",
+                       },
+                       FullName = "SomeFullName",
+                       UserName = "SomeUserName",
+                       PasswordHash = "qwerty",
+                   },
+                        Quantity = 1
+                   },
+                },
+                new Invoice
+                {
+                   BilledTo = new ApplicationUser
+                   {
+                       Email = "SomeEmail@Email.com",
+                       Company = new Company
+                       {
+                           Name = "SomeCompanyName",
+                           Address = "SomeCompanyAddress",
+                       },
+                       FullName = "SomeFullName",
+                       UserName = "SomeUserName",
+                       PasswordHash = "qwerty",
+                   },
+                   Clothing = new Clothing
+                   {
+                        ClothingDiagramURL = "someUrl",
+                        Fabric = "Textile",
+                        Name = "ClothingName",
+                        PricePerUnit = 1m,
+                        Quantity = 1,
+                   },
+                   Order = new Order
+                   {
+                        Clothing = new Clothing
+                   {
+                        ClothingDiagramURL = "someUrl",
+                        Fabric = "Textile",
+                        Name = "ClothingName",
+                        PricePerUnit = 1m,
+                        Quantity = 1,
+                   },
+                        Issuer = new ApplicationUser{
+                       Email = "SomeEmail@Email.com",
+                       Company = new Company
+                       {
+                           Name = "SomeCompanyName",
+                           Address = "SomeCompanyAddress",
+                       },
+                       FullName = "SomeFullName",
+                       UserName = "SomeUserName",
+                       PasswordHash = "qwerty",
+                   },
+                        Quantity = 1
+                   },
+                },
+            };
+        }
         public InvoiceServiceTests()
         {
             MapperInitializer.InitializeMapper();
@@ -29,7 +129,11 @@
 
             await service.CreateInvoiceAsync(userId, clothingId, orderId);
 
-            Assert.True(context.Clothings.Any());
+            var actualResult = await context.Invoices.FirstOrDefaultAsync();
+
+            Assert.Equal(userId, actualResult.BIlledToId);
+            Assert.Equal(clothingId, actualResult.ClothingId);
+            Assert.Equal(orderId, actualResult.OrderId);
         }
 
         [Fact]
@@ -57,7 +161,7 @@
         }
 
         [Fact]
-        public void GetAllInvoiceByUserIdShuldReturnNullIfThereIsNoSuchUser()
+        public void GetAllInvoiceByUserIdShuldReturnEmptyListIfThereIsNoSuchUser()
         {
             var context = InMemoryDatabase.GetDbContext();
             var service = new InvoiceService(context);
@@ -65,13 +169,33 @@
             var fakeId = "Fake";
             var invoiceFromDb = service.GetAllInovoicesByUserId<InvoiceViewModel>(fakeId);
 
-            var actualResult = invoiceFromDb.Select(x => x.BIlledToUser).FirstOrDefault();
+            Assert.Empty(invoiceFromDb);
+        }
 
-            Assert.Null(actualResult);
+        [Fact]
+        public void GetAllInvoiceShouldReturnEmptyListIfThereIsNoIvoices()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            var service = new InvoiceService(context);
+
+            var invoiceFromDb = service.GetAllInovoices<InvoiceViewModel>();
+
+            Assert.Empty(invoiceFromDb);
+        }
+
+        [Fact]
+        public void GetAllInvoiceShuldReturnAllInvoicesInTheDataBase()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            var service = new InvoiceService(context);
+
+            var expectedResult = GetTestData();
+            var actualResult = service.GetAllInovoices<InvoiceViewModel>().ToList();
+
+            for (int i = 0; i < actualResult.Count(); i++)
+            {
+                Assert.Equal(expectedResult[i].Id, actualResult[i].Id);
+            }
         }
     }
 }
-
-//IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id); one more test !
-//IEnumerable<TViewModel> GetAllInovoices<TViewModel>();
-//TViewModel GetInvoiceById<TViewModel>(string id);
