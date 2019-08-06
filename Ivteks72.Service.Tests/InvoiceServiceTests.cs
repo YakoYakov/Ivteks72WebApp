@@ -10,6 +10,7 @@
     using Ivteks72.Service.Tests.Common;
     using Microsoft.EntityFrameworkCore;
     using Ivteks72.Domain;
+    using Ivteks72.Data;
 
     public class InvoiceServiceTests
     {
@@ -22,6 +23,7 @@
                 {
                    BilledTo = new ApplicationUser
                    {
+                       Id = "Id",
                        Email = "SomeEmail@Email.com",
                        Company = new Company
                        {
@@ -112,6 +114,7 @@
                 },
             };
         }
+
         public InvoiceServiceTests()
         {
             MapperInitializer.InitializeMapper();
@@ -161,7 +164,7 @@
         }
 
         [Fact]
-        public void GetAllInvoiceByUserIdShuldReturnEmptyListIfThereIsNoSuchUser()
+        public void GetAllInvoiceByUserIdShouldReturnEmptyListIfThereIsNoSuchUser()
         {
             var context = InMemoryDatabase.GetDbContext();
             var service = new InvoiceService(context);
