@@ -1,12 +1,58 @@
 ﻿namespace Ivteks72.Service.Tests
 {
+    using Ivteks72.App.Models.Order;
+    using Ivteks72.Data;
     using Ivteks72.Domain;
+    using Ivteks72.Domain.Enums;
     using Ivteks72.Service.Tests.Common;
+    using Moq;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Xunit;
 
     public class OrderServiceTests
     {
+        private List<Order> GetTestData()
+        {
+            return new List<Order>()
+            {
+                new Order
+                {
+                    Clothing = new Clothing(),
+                    Issuer = new ApplicationUser
+                    {
+                        UserName = "FirstName"
+                    },
+                    Status = OrderStatus.Finished,
+                },
+                new Order
+                {
+                    Clothing = new Clothing(),
+                    Issuer = new ApplicationUser
+                    {
+                        UserName = "SecondName"
+                    },
+                    Status = OrderStatus.Pending,
+                },
+                new Order
+                {
+                    Clothing = new Clothing(),
+                    Issuer = new ApplicationUser
+                    {
+                        UserName = "ThirdName"
+                    },
+                    Status = OrderStatus.Finished,
+                }
+            };
+        }
+
+        private async Task SeedData(Ivteks72DbContext context)
+        {
+            context.AddRange(GetTestData());
+            await context.SaveChangesAsync();
+        }
+
         public OrderServiceTests()
         {
             MapperInitializer.InitializeMapper();
@@ -25,11 +71,28 @@
 
             Assert.NotEmpty(context.Orders);
         }
+
+        [Fact]
+        public async Task GetAllOrdersSortedByUserThenByCompanyShouldReturnTheCorrectOrder()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderService = new Mock<IOrderService>();
+
+            var expectedResult = GetTestData().First();
+
+            orderService.Setup(g => g.GetOrderFromDbById(expectedResult.Id)).Returns(expectedResult);
+
+            var service = orderService.Object;
+            var actualResult = service.GetOrderFromDbById(expectedResult.Id);
+
+            Assert.Same(expectedResult, actualResult);
+        }
     }
 }
 
 
-//Task CreateOrderAsync(Clothing clothing, string issuerId);
 //List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
 //List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>();
 //TOrderViewModel GetOrderById<TOrderViewModel>(string id);
