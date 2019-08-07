@@ -1,6 +1,5 @@
 ﻿namespace Ivteks72.Service.Tests
 {
-    using Ivteks72.App.Models.Order;
     using Ivteks72.Data;
     using Ivteks72.Domain;
     using Ivteks72.Domain.Enums;
@@ -73,7 +72,7 @@
         }
 
         [Fact]
-        public async Task GetAllOrdersSortedByUserThenByCompanyShouldReturnTheCorrectOrder()
+        public async Task GetOrderFromDbByIdShouldReturnTheCorrectOrder()
         {
             var context = InMemoryDatabase.GetDbContext();
             await SeedData(context);
@@ -88,6 +87,24 @@
             var actualResult = service.GetOrderFromDbById(expectedResult.Id);
 
             Assert.Same(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task GetOrderFromDbByIdWhitNoneexistenceIdShouldReturnNull()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderService = new Mock<IOrderService>();
+
+            var fakeId = "nonexistent";
+            var order = new Order();
+            orderService.Setup(g => g.GetOrderFromDbById("Id")).Returns(order);
+
+            var service = orderService.Object;
+            var actualResult = service.GetOrderFromDbById(fakeId);
+
+            Assert.Null(actualResult);
         }
     }
 }
