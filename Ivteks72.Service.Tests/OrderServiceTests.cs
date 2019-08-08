@@ -1,13 +1,17 @@
 ﻿namespace Ivteks72.Service.Tests
 {
+    using Ivteks72.App.Models.Order;
     using Ivteks72.Data;
     using Ivteks72.Domain;
     using Ivteks72.Domain.Enums;
     using Ivteks72.Service.Tests.Common;
+
     using Moq;
+
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Xunit;
 
     public class OrderServiceTests
@@ -77,13 +81,13 @@
             var context = InMemoryDatabase.GetDbContext();
             await SeedData(context);
 
-            var orderService = new Mock<IOrderService>();
+            var mockOrderService = new Mock<IOrderService>();
 
             var expectedResult = GetTestData().First();
 
-            orderService.Setup(g => g.GetOrderFromDbById(expectedResult.Id)).Returns(expectedResult);
+            mockOrderService.Setup(g => g.GetOrderFromDbById(expectedResult.Id)).Returns(expectedResult);
 
-            var service = orderService.Object;
+            var service = mockOrderService.Object;
             var actualResult = service.GetOrderFromDbById(expectedResult.Id);
 
             Assert.Same(expectedResult, actualResult);
@@ -106,12 +110,87 @@
 
             Assert.Null(actualResult);
         }
+
+        [Fact]
+        public async Task EdidOrderStatusAsyncWithExistingStatusShuldChangeTheOrderStatus()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderService = new OrderService(context);
+
+            var orderToEdit = context.Orders.FirstOrDefault();
+            var statusToChangeTo = "Rejected";
+            var orderId = orderToEdit.Id;
+
+            await orderService.EditOrderStatusAsync(orderId, statusToChangeTo);
+
+            var expectedResult = OrderStatus.Rejected;
+            var actualResult = orderToEdit.Status;
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task EditOrderStatusWithWrongStatusShouldNotChangeTheOrderStatus()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderService = new OrderService(context);
+
+            var orderToEdit = context.Orders.FirstOrDefault();
+            var statusToChangeTo = "FakeStatus";
+            var orderId = orderToEdit.Id;
+
+            await orderService.EditOrderStatusAsync(orderId, statusToChangeTo);
+
+            var expectedResult = OrderStatus.Rejected;
+            var actualResult = orderToEdit.Status;
+
+            Assert.NotEqual(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task GetOrderByIdShouldReturnTheCorrectOrder()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var mockOrderService = new Mock<IOrderService>();
+
+            var methodReturnValue = new OrderByStatusViewModel();
+            var expectedResult = GetTestData().First();
+
+            mockOrderService.Setup(g => g.GetOrderById<OrderByStatusViewModel>(expectedResult.Id)).Returns(methodReturnValue);
+
+            var service = mockOrderService.Object;
+            var returnedOrder = service.GetOrderById<OrderByStatusViewModel>(expectedResult.Id);
+
+            Assert.Same(expectedResult.Clothing.Name, returnedOrder.ClothingName);
+        }
+
+        [Fact]
+        public async Task GetOrderByIdWihtNonExistantIdShouldReturnNull()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderService = new Mock<IOrderService>();
+
+            var fakeId = "nonexistent";
+            var methodReturnValue = new OrderByStatusViewModel();
+
+            orderService.Setup(g => g.GetOrderById<OrderByStatusViewModel>("Id")).Returns(methodReturnValue);
+
+            var service = orderService.Object;
+            var actualResult = service.GetOrderById<OrderByStatusViewModel>(fakeId);
+
+            Assert.Null(actualResult);
+        }
     }
 }
 
 
 //List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
 //List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>();
-//TOrderViewModel GetOrderById<TOrderViewModel>(string id);
-//Task EditOrderStatusAsync(string id, string newStatus);
-//Order GetOrderFromDbById(string id);

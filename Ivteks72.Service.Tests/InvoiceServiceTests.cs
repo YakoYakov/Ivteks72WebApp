@@ -11,6 +11,7 @@
     using Microsoft.EntityFrameworkCore;
     using Ivteks72.Domain;
     using Ivteks72.Data;
+    using Moq;
 
     public class InvoiceServiceTests
     {
@@ -21,98 +22,23 @@
             {
                 new Invoice
                 {
-                   BilledTo = new ApplicationUser
-                   {
-                       Id = "Id",
-                       Email = "SomeEmail@Email.com",
-                       Company = new Company
-                       {
-                           Name = "SomeCompanyName",
-                           Address = "SomeCompanyAddress",
-                       },
-                       FullName = "SomeFullName",
-                       UserName = "SomeUserName",
-                       PasswordHash = "qwerty",
-                   },
-                   Clothing = new Clothing
-                   {
-                        ClothingDiagramURL = "someUrl",
-                        Fabric = "Textile",
-                        Name = "ClothingName",
-                        PricePerUnit = 1m,
-                        Quantity = 1,
-                   },
-                   Order = new Order
-                   {
-                        Clothing = new Clothing
-                   {
-                        ClothingDiagramURL = "someUrl",
-                        Fabric = "Textile",
-                        Name = "ClothingName",
-                        PricePerUnit = 1m,
-                        Quantity = 1,
-                   },
-                        Issuer = new ApplicationUser{
-                       Email = "SomeEmail@Email.com",
-                       Company = new Company
-                       {
-                           Name = "SomeCompanyName",
-                           Address = "SomeCompanyAddress",
-                       },
-                       FullName = "SomeFullName",
-                       UserName = "SomeUserName",
-                       PasswordHash = "qwerty",
-                   },
-                        Quantity = 1
-                   },
+                   BilledTo = new ApplicationUser(),
+                   Clothing = new Clothing(),
+                   Order = new Order(),
                 },
                 new Invoice
                 {
-                   BilledTo = new ApplicationUser
-                   {
-                       Email = "SomeEmail@Email.com",
-                       Company = new Company
-                       {
-                           Name = "SomeCompanyName",
-                           Address = "SomeCompanyAddress",
-                       },
-                       FullName = "SomeFullName",
-                       UserName = "SomeUserName",
-                       PasswordHash = "qwerty",
-                   },
-                   Clothing = new Clothing
-                   {
-                        ClothingDiagramURL = "someUrl",
-                        Fabric = "Textile",
-                        Name = "ClothingName",
-                        PricePerUnit = 1m,
-                        Quantity = 1,
-                   },
-                   Order = new Order
-                   {
-                        Clothing = new Clothing
-                   {
-                        ClothingDiagramURL = "someUrl",
-                        Fabric = "Textile",
-                        Name = "ClothingName",
-                        PricePerUnit = 1m,
-                        Quantity = 1,
-                   },
-                        Issuer = new ApplicationUser{
-                       Email = "SomeEmail@Email.com",
-                       Company = new Company
-                       {
-                           Name = "SomeCompanyName",
-                           Address = "SomeCompanyAddress",
-                       },
-                       FullName = "SomeFullName",
-                       UserName = "SomeUserName",
-                       PasswordHash = "qwerty",
-                   },
-                        Quantity = 1
-                   },
+                   BilledTo = new ApplicationUser(),
+                   Clothing = new Clothing(),
+                   Order = new Order(), 
                 },
             };
+        }
+
+        private async Task SeedData(Ivteks72DbContext context)
+        {
+            context.AddRange(GetTestData());
+            await context.SaveChangesAsync();
         }
 
         public InvoiceServiceTests()

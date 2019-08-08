@@ -55,6 +55,7 @@
 
             var actualclothing = await service.CreateClothingAsync(name, fabric, fileForDb, quantity, pricePerUnit);
 
+            Assert.NotNull(actualclothing);
             Assert.IsAssignableFrom(testClothing.GetType(), actualclothing);
         }
     }
