@@ -66,30 +66,6 @@
         }
 
         [Fact]
-        public void GetAllInvoicesShoulReturnNullIfThereAreNoInvoicesInDb()
-        {
-            var context = InMemoryDatabase.GetDbContext();
-            var service = new InvoiceService(context);
-
-            var nullInvoices = service.GetAllInovoices<InvoiceViewModel>();
-
-            Assert.Empty(nullInvoices);
-        }
-
-        [Fact]
-        public void GetAllInvoicesShoulReturnAllInvoicesFromDb()
-        {
-            var context = InMemoryDatabase.GetDbContext();
-            var service = new InvoiceService(context);
-
-            var invoices = new List<InvoiceViewModel>();
-
-            var actualResult = service.GetAllInovoices<InvoiceViewModel>();
-
-            Assert.Equal(invoices, actualResult);
-        }
-
-        [Fact]
         public void GetAllInvoiceByUserIdShouldReturnEmptyListIfThereIsNoSuchUser()
         {
             var context = InMemoryDatabase.GetDbContext();
@@ -126,5 +102,8 @@
                 Assert.Equal(expectedResult[i].Id, actualResult[i].Id);
             }
         }
+
+        //IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id);
+        //TViewModel GetInvoiceById<TViewModel>(string id);
     }
 }
