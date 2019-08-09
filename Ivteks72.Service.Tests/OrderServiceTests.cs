@@ -197,7 +197,7 @@
             await SeedData(context);
 
             var methodResult = new List<OrderByStatusViewModel>();
-            
+
             var orderFromDb = GetTestData().FirstOrDefault();
 
             var expectedResult = Mapper.Map<Order, OrderByStatusViewModel>(orderFromDb,
@@ -216,9 +216,60 @@
             Assert.Same(expectedResult.IssuerName, actualResult.IssuerName);
             Assert.Same(expectedResult.OrderStatus, actualResult.OrderStatus);
         }
+
+        [Fact]
+        public void GetOrderByStatusWithIncorrectParametersShouldReturnEmptyList()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            var service = new OrderService(context);
+
+            var missingOrderStatus = OrderStatus.Accepted;
+            var missingUserName = "Missing";
+
+            var actualResult = service.GetOrdersByStatus<OrderByStatusViewModel>(missingOrderStatus, missingUserName);
+
+            Assert.Empty(actualResult);
+        }
+
+        [Fact]
+        public async Task GetAllOrdersSortedByUserThenByCompanyShouldReturnAllOrdersInTheDataBase()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var methodResults = new List<AdminOrderViewModel>();
+
+            var ordersFromDb = GetTestData();
+
+            foreach (var order in ordersFromDb)
+            {
+                var mappedOrder = Mapper.Map<Order, AdminOrderViewModel>(order,
+                opt => opt.ConfigureMap()
+                .ForMember(dest => dest.IssuerName, m => m.MapFrom(src => src.Issuer.UserName)));
+                methodResults.Add(mappedOrder);
+            }
+
+            var orderService = new Mock<IOrderService>();
+            orderService.Setup(g => g.GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>()).Returns(methodResults);
+
+            var actualResults = orderService.Object.GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
+
+            for (int i = 0; i < methodResults.Count; i++)
+            {
+                Assert.Same(methodResults[i].IssuerName, actualResults[i].IssuerName);
+                Assert.Same(methodResults[i].OrderStatus, actualResults[i].OrderStatus);
+            }
+        }
+
+        [Fact]
+        public void GetAllOrdersSortedByUserThenByCompanyWithNoOrdersInDataBaseShouldReturnEmpyList()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            var service = new OrderService(context);
+
+            var actualResult = service.GetAllOrdersSortedByUserThenByCompany<AdminOrderViewModel>();
+
+            Assert.Empty(actualResult);
+        }
     }
 }
-
-
-//List<TOrderViewModel> GetOrdersByStatus<TOrderViewModel>(OrderStatus status, string username);
-//List<TOrderViewModel> GetAllOrdersSortedByUserThenByCompany<TOrderViewModel>();
