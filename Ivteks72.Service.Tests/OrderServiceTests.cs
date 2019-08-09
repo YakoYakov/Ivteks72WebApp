@@ -1,5 +1,6 @@
 ﻿namespace Ivteks72.Service.Tests
 {
+    using AutoMapper;
     using Ivteks72.App.Models.Order;
     using Ivteks72.Data;
     using Ivteks72.Domain;
@@ -187,6 +188,33 @@
             var actualResult = service.GetOrderById<OrderByStatusViewModel>(fakeId);
 
             Assert.Null(actualResult);
+        }
+
+        [Fact]
+        public async Task GetOrderByStatusWithCorrectStatusShouldReturnTheOrder()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var methodResult = new List<OrderByStatusViewModel>();
+            
+            var orderFromDb = GetTestData().FirstOrDefault();
+
+            var expectedResult = Mapper.Map<Order, OrderByStatusViewModel>(orderFromDb,
+                opt => opt.ConfigureMap()
+                .ForMember(dest => dest.IssuerName, m => m.MapFrom(src => src.Issuer.UserName)));
+            methodResult.Add(expectedResult);
+
+            var orderStatus = orderFromDb.Status;
+            var orderUser = orderFromDb.Issuer.UserName;
+
+            var orderService = new Mock<IOrderService>();
+            orderService.Setup(g => g.GetOrdersByStatus<OrderByStatusViewModel>(orderStatus, orderUser)).Returns(methodResult);
+
+            var actualResult = orderService.Object.GetOrdersByStatus<OrderByStatusViewModel>(orderStatus, orderUser).FirstOrDefault();
+
+            Assert.Same(expectedResult.IssuerName, actualResult.IssuerName);
+            Assert.Same(expectedResult.OrderStatus, actualResult.OrderStatus);
         }
     }
 }
