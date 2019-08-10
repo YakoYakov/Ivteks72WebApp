@@ -12,6 +12,7 @@
     using Ivteks72.Domain;
     using Ivteks72.Data;
     using Moq;
+    using AutoMapper;
 
     public class InvoiceServiceTests
     {
@@ -60,9 +61,7 @@
 
             var actualResult = await context.Invoices.FirstOrDefaultAsync();
 
-            Assert.Equal(userId, actualResult.BIlledToId);
-            Assert.Equal(clothingId, actualResult.ClothingId);
-            Assert.Equal(orderId, actualResult.OrderId);
+            Assert.NotNull(actualResult);
         }
 
         [Fact]
@@ -75,6 +74,29 @@
             var invoiceFromDb = service.GetAllInovoicesByUserId<InvoiceViewModel>(fakeId);
 
             Assert.Empty(invoiceFromDb);
+        }
+
+        [Fact]
+        public async Task GetAllInvoiceByUserIdShouldReturnWithCorrectIdTheUserInvoices()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var methodResult = new List<InvoiceViewModel>();
+            var orderFromDb = GetTestData().FirstOrDefault();
+
+            var expectedResult = Mapper.Map<Invoice, InvoiceViewModel>(orderFromDb);
+
+            methodResult.Add(expectedResult);
+
+            var id = expectedResult.Id;
+
+            var InvoiceService = new Mock<IInvoiceService>();
+            InvoiceService.Setup(g => g.GetAllInovoicesByUserId<InvoiceViewModel>(id)).Returns(methodResult);
+
+            var actualResult = InvoiceService.Object.GetAllInovoicesByUserId<InvoiceViewModel>(id);
+
+            Assert.Equal(expectedResult.Id, actualResult.FirstOrDefault().Id);            
         }
 
         [Fact]
@@ -103,7 +125,37 @@
             }
         }
 
-        //IEnumerable<TViewModel> GetAllInovoicesByUserId<TViewModel>(string id);
-        //TViewModel GetInvoiceById<TViewModel>(string id);
+        [Fact]
+        public async Task GetInvoiceByIdShouldReturnWithCorrectIdTheInvoice()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+
+            var orderFromDb = GetTestData().FirstOrDefault();
+
+            var expectedResult = Mapper.Map<Invoice, InvoiceViewModel>(orderFromDb);
+
+            var id = expectedResult.Id;
+
+            var InvoiceService = new Mock<IInvoiceService>();
+            InvoiceService.Setup(g => g.GetInvoiceById<InvoiceViewModel>(id)).Returns(expectedResult);
+
+            var actualResult = InvoiceService.Object.GetInvoiceById<InvoiceViewModel>(id);
+
+            Assert.Equal(expectedResult.Id, actualResult.Id);
+        }
+
+        [Fact]
+        public async Task GetInvoiceByIdShouldReturnWithMissingIdNull()
+        {
+            var context = InMemoryDatabase.GetDbContext();
+            await SeedData(context);
+            var service = new InvoiceService(context);
+            var fakeId = "FakeId";
+
+            var actualResult = service.GetInvoiceById<InvoiceViewModel>(fakeId);
+
+            Assert.Null(actualResult);
+        }
     }
 }
