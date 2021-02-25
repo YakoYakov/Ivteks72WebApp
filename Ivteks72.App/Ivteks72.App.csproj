@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Ivteks72.AutoMapping\Ivteks72.AutoMapping.csproj" />
     <ProjectReference Include="..\Ivteks72.Data\Ivteks72.Data.csproj" />
     <ProjectReference Include="..\Ivteks72.Service\Ivteks72.Service.csproj" />
+    <ProjectReference Include="C:\Users\yakop.DESKTOP-88FR4P1\source\repos\Postman\Ivteks72.PostmanRecoder.csproj" />
   </ItemGroup>
 
 </Project>

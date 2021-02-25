@@ -18,8 +18,10 @@
     using Ivteks72.App.Services;
     using Ivteks72.App.Models;
     using Ivteks72.AutoMapping;
+    using Ivteks72.PostmanRecoder;
 
     using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Http.Extensions;
 
     public class Startup
     {
@@ -118,6 +120,13 @@
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UsePostmanRecoder(true);
+
+            app.MapWhen(context => context.Request.GetEncodedUrl().Contains("recording=0"), builder =>
+            {
+                builder.UsePostmanRecoder(false);
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

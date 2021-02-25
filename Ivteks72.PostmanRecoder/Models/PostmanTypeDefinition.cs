@@ -1,0 +1,9 @@
+﻿namespace Ivteks72.Postman.Models
+{
+    internal class PostmanTypeDefinition
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public string Type { get; set; }
+    }
+}
