@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.AutoMapping", "Ivt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.Service.Tests", "Ivteks72.Service.Tests\Ivteks72.Service.Tests.csproj", "{74A977EB-6FEF-4B02-8210-33A02631C8ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.PostmanRecoder", "C:\Users\yakop.DESKTOP-88FR4P1\source\repos\Postman\Ivteks72.PostmanRecoder.csproj", "{8933E502-76EC-41D3-8668-66AA6955CBB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ivteks72.PostmanRecoder", "Ivteks72.PostmanRecoder\Ivteks72.PostmanRecoder.csproj", "{3C2FD683-0784-43A4-AE1A-681FF8B22226}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{74A977EB-6FEF-4B02-8210-33A02631C8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74A977EB-6FEF-4B02-8210-33A02631C8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74A977EB-6FEF-4B02-8210-33A02631C8ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8933E502-76EC-41D3-8668-66AA6955CBB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8933E502-76EC-41D3-8668-66AA6955CBB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8933E502-76EC-41D3-8668-66AA6955CBB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8933E502-76EC-41D3-8668-66AA6955CBB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2FD683-0784-43A4-AE1A-681FF8B22226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2FD683-0784-43A4-AE1A-681FF8B22226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2FD683-0784-43A4-AE1A-681FF8B22226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2FD683-0784-43A4-AE1A-681FF8B22226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,9 +5,9 @@ namespace Ivteks72.PostmanRecoder
 {
     public static class PostmanExtensions
     {
-        public static IApplicationBuilder UsePostmanRecoder(this IApplicationBuilder builder)
+        public static IApplicationBuilder UsePostmanRecoder(this IApplicationBuilder builder, bool isRecording)
         {
-            return builder.UseMiddleware<PostmanImp>();
+            return builder.UseMiddleware<PostmanImp>(isRecording);
         }
     }
 }

@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>dbdaa801-55d8-494c-863d-37afdd356464</UserSecretsId>
   </PropertyGroup>
@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="Sendgrid" Version="9.11.0" />
   </ItemGroup>
 
@@ -18,8 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Ivteks72.AutoMapping\Ivteks72.AutoMapping.csproj" />
     <ProjectReference Include="..\Ivteks72.Data\Ivteks72.Data.csproj" />
+    <ProjectReference Include="..\Ivteks72.PostmanRecoder\Ivteks72.PostmanRecoder.csproj" />
     <ProjectReference Include="..\Ivteks72.Service\Ivteks72.Service.csproj" />
-    <ProjectReference Include="C:\Users\yakop.DESKTOP-88FR4P1\source\repos\Postman\Ivteks72.PostmanRecoder.csproj" />
   </ItemGroup>
 
 </Project>

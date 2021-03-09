@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,10 @@ namespace Ivteks72.Postman
 {
     public class PostmanImp : IRequestRecorder
     {
+        private static PostmanRunnerModel _RunnerModel = new PostmanRunnerModel();
         private readonly RequestDelegate _next;
         private StringBuilder _Builder = new StringBuilder();
-        private static PostmanImp postmanInstance;
-
+        public bool IsRunning { get; set; }
         public PostmanImp(RequestDelegate next) 
         {
             _next = next;
@@ -26,69 +27,78 @@ namespace Ivteks72.Postman
 
         public Task<StringBuilder> GetFinalResult()
         {
-            throw new NotImplementedException();
+            StringBuilder result = GetJsonString(_RunnerModel);
+            _RunnerModel = new PostmanRunnerModel();
+            return Task.FromResult(result);
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
-            PostmanRunnerModel resultTest = new PostmanRunnerModel();
+            var request = context.Request;
+            #region Setting up required data from the HttpRequest
+            string body = await GetBodyAsync(request);
 
-            var url = context.Request.GetEncodedUrl(); // raw Uri for Name in Jsons
-            var settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            var headers =JObject.Parse(JsonConvert.SerializeObject(context.Request.Headers, settings));
-            var serializer = JsonSerializer.CreateDefault();
+            string method = request.Method;
+
             List<PostmanHeaderSection> pHeaders = new List<PostmanHeaderSection>();
-            List<string> pathSegments = context.Request.Path.Value.Split('/').ToList(); //inputModel.Client[":path"].ToString().Split("/").ToList(); //request.Path.Value.Split('/').ToList();
-            List<string> hostSegments = context.Request.Host.Value.Split('/').ToList(); //inputModel.Client["Host"].ToString().Split("/").ToList();//request.Host.Value.Split('/').ToList();
+            JObject headers = JObject.Parse(GetJsonString(request.Headers).ToString());
+
+
+            string url = request.GetEncodedUrl();
+            List<string> hostSegments = request.Host.Value.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> pathSegments = request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            //List<PostmanQuerySection> queries = request.Query.Select(k => new PostmanQuerySection
+            //{
+            //    Key = k.Key,
+            //    Value = k.Value.ToString()
+            //}).ToList();
 
             foreach (var header in headers)
             {
                 pHeaders.Add(new PostmanHeaderSection
                 {
-                    Key = header.Key,
-                    Value = header.Value
+                    Key = header.Key.StartsWith(':') ? header.Key.TrimStart(':') : header.Key,
+                    Value = header.Value.First.ToString()
                 });
             }
+            #endregion
 
-            var body = await GetBodyAsync(context.Request);
-                //JObject.Parse(JsonConvert.SerializeObject(inputModel.Data, settings)).ToString();
+            PostmanBuilder builder = new PostmanBuilder();
 
-            var builder = new PostmanBuilder();
-            var requestTest = builder
+            // Construct the Request entity
+            RequestContent requestContent = builder
                 .MethodBuilder
-                    .AddMethod("POST")
+                    .AddMethod(method)
                 .HeaderBuilder
                     .AddHeader(pHeaders)
                 .BodyBuilder
                     .AddBody("raw", body)
                 .UrlBuilder
-                    .AddUrlData(url, context.Request.Scheme, pathSegments, hostSegments);
+                    .AddUrlData(url, request.Scheme, pathSegments, hostSegments/*, queries*/);
 
-           var a = JsonConvert.SerializeObject(requestTest);
-            //_Builder.AppendLine(headers.ToString());
-            ;
-            //WriteToFile(_Builder);
-            await _next(context);
-        }
-
-        //public static PostmanImp GetInstance()
-        //{
-        //    if (postmanInstance == null)
-        //    {
-        //        postmanInstance = new PostmanImp();
-        //    }
-
-        //    return postmanInstance;
-        //}
-
-        private void WriteToFile(StringBuilder content)
-        {
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"D:\Old_Desktop\TrainigWorkFor\test.json", true))
+            // Add the first event for script to the first request
+            if (_RunnerModel.PostmanItemRequests.Count < 1)
             {
-                file.WriteLine(content);
+                //var firstRequestEvent = JsonConvert.DeserializeObject<List<Event>>(ResourceReader.GetResource("FirstRequest"));
+
+                _RunnerModel.PostmanItemRequests.Add(new PostmanRequest
+                {
+                    Name = url,
+                    //FirstRequestEvent = firstRequestEvent,
+                    RequestContent = requestContent
+                });
+
+                return;
             }
+
+            // Add newly constructed Request and the url to the Runner Model 
+            _RunnerModel.PostmanItemRequests.Add(new PostmanRequest
+            {
+                Name = url,
+                RequestContent = requestContent
+            });
+            await _next(context);
         }
 
         private async Task<string> GetBodyAsync(HttpRequest request)
@@ -101,6 +111,7 @@ namespace Ivteks72.Postman
                 request.Body,
                 encoding: Encoding.UTF8,
                 detectEncodingFromByteOrderMarks: false,
+                bufferSize: 1024,
                 leaveOpen: true))
             {
                 body = await reader.ReadToEndAsync();
@@ -108,8 +119,26 @@ namespace Ivteks72.Postman
                 // Reset the request body stream position so the next middleware can read it
                 request.Body.Position = 0;
             }
-
+            //request.EnableBuffering();
             return body;
+        }
+
+        private StringBuilder GetJsonString(object model)
+        {
+            string jsonString = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                ContractResolver = new DefaultContractResolver()
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            });
+
+            StringBuilder builder = new StringBuilder(jsonString);
+
+            return builder;
         }
 
     }
