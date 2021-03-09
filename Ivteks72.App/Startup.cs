@@ -22,6 +22,7 @@
 
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Http.Extensions;
+    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
@@ -90,10 +91,10 @@
 
             services.Configure<MessageSenderOptions>(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -110,7 +111,7 @@
                 new RoleSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
                 new AdminSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
-
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -132,11 +133,12 @@
             app.UseStaticFiles();
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

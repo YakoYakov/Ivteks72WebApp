@@ -4,7 +4,6 @@
     using System.IO;
 
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Http.Internal;
 
     using Ivteks72.Domain;
     using Ivteks72.Service.Tests.Common;
