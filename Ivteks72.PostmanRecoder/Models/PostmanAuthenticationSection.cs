@@ -1,22 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ivteks72.Postman.Models
 {
     public class PostmanAuthenticationSection
     {
-        private string type;
-        private List<PostmanTypeDefinition> typeDefinitions;
-        private string protocolProfileBehavior;
+        public string Type { get; set; }
 
-
-        public PostmanAuthenticationSection()
-        {
-            this.protocolProfileBehavior = string.Empty;
-        }
-
-        public string Type { get => type; set => type = value; }
-        internal List<PostmanTypeDefinition> TypeDefinitions { get => typeDefinitions; set => typeDefinitions = value; }
+        [JsonProperty("oauth2")]
+        public List<PostmanTypeDefinition> TypeDefinitions { get; set; }
+        [JsonProperty("protocolProfileBehavior")]
+        public object ProtocolProfileBehavior { get; set; } = new { };
     }
 }

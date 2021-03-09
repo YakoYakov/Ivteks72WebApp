@@ -10,12 +10,15 @@ namespace Ivteks72.Postman.Utilities
             this.postmanRequestContent = postmanRequestContent;
         }
 
-        public PostmanUrlBuilder AddUrlData(string url, string protocol, List<string> segments, List<string> hostSegments)
+        public PostmanUrlBuilder AddUrlData(string url, string protocol, List<string> segments,
+                                            List<string> hostSegments, List<PostmanQuerySection> query)
         {
+            this.postmanRequestContent.PostmanUrl = new PostmanUrlSection();
             this.postmanRequestContent.PostmanUrl.Raw = url;
             this.postmanRequestContent.PostmanUrl.Protocol = protocol;
-            this.postmanRequestContent.PostmanUrl.PathSegments = segments;
             this.postmanRequestContent.PostmanUrl.HostSegments = hostSegments;
+            this.postmanRequestContent.PostmanUrl.PathSegments = segments;
+            this.postmanRequestContent.PostmanUrl.Queries = query;
 
             return this;
         }

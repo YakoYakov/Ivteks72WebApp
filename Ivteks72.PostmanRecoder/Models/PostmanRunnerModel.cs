@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Ivteks72.Postman.Models.TestScriptModels;
+using Ivteks72.Postman.Utilities;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ivteks72.Postman.Models
 {
     public class PostmanRunnerModel
     {
-        private Dictionary<string, string> info;
-
-        private List<PostmanRequest> postmanItemRequests;
-
-        private PostmanAuthenticationSection authenticationSection;
+        private readonly string preRequestEvent = ResourceReader.GetResource("PreRequest");
 
         public PostmanRunnerModel()
         {
@@ -36,10 +34,25 @@ namespace Ivteks72.Postman.Models
                     }
                 }
             };
+
+            SetPreRequestEvents(this.preRequestEvent);
         }
 
-        public Dictionary<string, string> Info { get => info; private set => info = value; }
-        public PostmanAuthenticationSection AuthenticationSection { get => authenticationSection; private set => authenticationSection = value; }
-        public List<PostmanRequest> PostmanItemRequests { get => postmanItemRequests; set => postmanItemRequests = value; }
+        public Dictionary<string, string> Info { get; private set; }
+
+        [JsonProperty("item")]
+        public List<PostmanRequest> PostmanItemRequests { get; set; }
+
+        [JsonProperty("auth")]
+        public PostmanAuthenticationSection AuthenticationSection { get; private set; }
+
+        [JsonProperty("event")]
+        List<Event> PreRequestEvent { get; set; }
+
+        private void SetPreRequestEvents(string preRequestEvent)
+        {
+            var events = JsonConvert.DeserializeObject<List<Event>>(preRequestEvent);
+            this.PreRequestEvent = events;
+        }
     }
 }

@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Ivteks72.Postman.Models.TestScriptModels;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Ivteks72.Postman.Models
 {
     public class PostmanRequest
     {
-        private string name;
+        public string Name { get; set; }
 
-        private RequestContent requestContent;
+        [JsonProperty("event")]
+        public List<Event> FirstRequestEvent { get; set; }
 
-        private List<string> response = new List<string>();
-
-        public string Name { get => name; set => name = value; }
-        public RequestContent RequestContent { get => requestContent; set => requestContent = value; }
+        [JsonProperty("request")]
+        public RequestContent RequestContent { get; set; }
+        public List<string> Response { get; set; } = new List<string>() { string.Empty };
     }
 }

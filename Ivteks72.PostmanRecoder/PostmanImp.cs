@@ -1,4 +1,5 @@
 ﻿using Ivteks72.Postman.Models;
+using Ivteks72.Postman.Models.TestScriptModels;
 using Ivteks72.Postman.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -17,11 +18,12 @@ namespace Ivteks72.Postman
     public class PostmanImp : IRequestRecorder
     {
         private static PostmanRunnerModel _RunnerModel = new();
-        private readonly RequestDelegate _next;
-        public bool IsRunning { get; set; }
-        public PostmanImp(RequestDelegate next) 
+        public readonly RequestDelegate _next;
+        private bool IsRunning { get; set; }
+        public PostmanImp(RequestDelegate next, bool isRecording) 
         {
             _next = next;
+            this.IsRunning = isRecording;
         }
 
         public Task<StringBuilder> GetFinalResult()
@@ -47,11 +49,11 @@ namespace Ivteks72.Postman
             List<string> hostSegments = request.Host.Value.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
             List<string> pathSegments = request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            //List<PostmanQuerySection> queries = request.Query.Select(k => new PostmanQuerySection
-            //{
-            //    Key = k.Key,
-            //    Value = k.Value.ToString()
-            //}).ToList();
+            List<PostmanQuerySection> queries = request.Query.Select(k => new PostmanQuerySection
+            {
+                Key = k.Key,
+                Value = k.Value.ToString()
+            }).ToList();
 
             foreach (var header in headers)
             {
@@ -74,17 +76,17 @@ namespace Ivteks72.Postman
                 .BodyBuilder
                     .AddBody("raw", body)
                 .UrlBuilder
-                    .AddUrlData(url, request.Scheme, pathSegments, hostSegments/*, queries*/);
+                    .AddUrlData(url, request.Scheme, pathSegments, hostSegments, queries);
 
             // Add the first event for script to the first request
             if (_RunnerModel.PostmanItemRequests.Count < 1)
             {
-                //var firstRequestEvent = JsonConvert.DeserializeObject<List<Event>>(ResourceReader.GetResource("FirstRequest"));
+                var firstRequestEvent = JsonConvert.DeserializeObject<List<Event>>(ResourceReader.GetResource("FirstRequest"));
 
                 _RunnerModel.PostmanItemRequests.Add(new PostmanRequest
                 {
                     Name = url,
-                    //FirstRequestEvent = firstRequestEvent,
+                    FirstRequestEvent = firstRequestEvent,
                     RequestContent = requestContent
                 });
 
@@ -102,7 +104,7 @@ namespace Ivteks72.Postman
 
         private static async Task<string> GetBodyAsync(HttpRequest request)
         {
-            //request.EnableBuffering();
+            request.EnableBuffering();
             string body = string.Empty;
 
             // Leave the body open so the next middleware can read it.
@@ -118,7 +120,7 @@ namespace Ivteks72.Postman
                 // Reset the request body stream position so the next middleware can read it
                 request.Body.Position = 0;
             }
-            //request.EnableBuffering();
+            request.EnableBuffering();
             return body;
         }
 

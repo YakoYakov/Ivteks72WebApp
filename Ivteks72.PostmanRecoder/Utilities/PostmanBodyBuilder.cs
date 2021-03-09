@@ -15,15 +15,10 @@ namespace Ivteks72.Postman.Utilities
         public PostmanBodyBuilder AddBody(string mode, string raw)
         {
             PostmanBodySection body = new PostmanBodySection();
-
-            if (mode == null && raw == null)
-            {
-                body.Raw = string.Empty;
-                body.Mode = string.Empty;
-            }
-
-            body.Raw = raw;
             body.Mode = mode;
+            body.Raw = raw;
+
+            this.postmanRequestContent.PostmanBody = body;
 
             return this;
         }

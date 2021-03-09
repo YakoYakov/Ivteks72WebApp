@@ -121,12 +121,12 @@
                 app.UseHsts();
             }
 
-            //app.UsePostmanRecoder(true);
+            app.UsePostmanRecoder(true);
 
-            //app.MapWhen(context => context.Request.GetEncodedUrl().Contains("recording=0"), builder =>
-            //{
-            //    builder.UsePostmanRecoder(false);
-            //});
+            app.MapWhen(context => context.Request.GetEncodedUrl().Contains("recording=0"), builder =>
+            {
+                builder.UsePostmanRecoder(false);
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
