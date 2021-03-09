@@ -20,15 +20,15 @@ namespace Ivteks72.Postman
         private static PostmanRunnerModel _RunnerModel = new();
         public readonly RequestDelegate _next;
         private bool IsRunning { get; set; }
-        public PostmanImp(RequestDelegate next, bool isRecording) 
+        public PostmanImp(RequestDelegate next, bool isRecording)
         {
             _next = next;
             this.IsRunning = isRecording;
         }
 
-        public Task<StringBuilder> GetFinalResult()
+        public Task<string> GetFinalResult()
         {
-            StringBuilder result = GetJsonString(_RunnerModel);
+            string result = GetJsonString(_RunnerModel);
             _RunnerModel = new PostmanRunnerModel();
             return Task.FromResult(result);
         }
@@ -99,6 +99,12 @@ namespace Ivteks72.Postman
                 Name = url,
                 RequestContent = requestContent
             });
+
+            if (!this.IsRunning)
+            {
+                string result = GetFinalResult().Result;
+                context.Items.Add("PResult", result);
+            }
             await _next(context);
         }
 
@@ -124,7 +130,7 @@ namespace Ivteks72.Postman
             return body;
         }
 
-        private static StringBuilder GetJsonString(object model)
+        private static string GetJsonString(object model)
         {
             string jsonString = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
@@ -137,9 +143,7 @@ namespace Ivteks72.Postman
                 }
             });
 
-            StringBuilder builder = new(jsonString);
-
-            return builder;
+            return jsonString;
         }
 
     }

@@ -121,11 +121,26 @@
                 app.UseHsts();
             }
 
-            app.UsePostmanRecoder(true);
+            app.MapWhen(context => context.Request.GetEncodedUrl().Contains("recording=1"), builder =>
+            {
+                builder.UsePostmanRecoder(true);
+            });
 
             app.MapWhen(context => context.Request.GetEncodedUrl().Contains("recording=0"), builder =>
             {
                 builder.UsePostmanRecoder(false);
+                builder.Run(async (context) =>
+                {
+                    object result;
+                    if (context.Items.TryGetValue("PResult", out result))
+                    {
+                        string resultAsString = result.ToString();
+                        context.Response.Clear();
+                        context.Response.Headers.Add("Content-Length", resultAsString.Length.ToString());
+                        context.Response.Headers.Add("Content-Disposition", "attachment;filename=PJson.json");
+                        await context.Response.WriteAsync(resultAsString);
+                    }
+                });
             });
 
             app.UseHttpsRedirection();

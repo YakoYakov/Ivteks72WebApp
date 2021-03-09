@@ -7,6 +7,6 @@ namespace Ivteks72.Postman
     public interface IRequestRecorder
     {
         Task InvokeAsync(HttpContext context);
-        Task<StringBuilder> GetFinalResult();
+        Task<string> GetFinalResult();
     }
 }
