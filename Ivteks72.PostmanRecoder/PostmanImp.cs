@@ -16,9 +16,8 @@ namespace Ivteks72.Postman
 {
     public class PostmanImp : IRequestRecorder
     {
-        private static PostmanRunnerModel _RunnerModel = new PostmanRunnerModel();
+        private static PostmanRunnerModel _RunnerModel = new();
         private readonly RequestDelegate _next;
-        private StringBuilder _Builder = new StringBuilder();
         public bool IsRunning { get; set; }
         public PostmanImp(RequestDelegate next) 
         {
@@ -40,7 +39,7 @@ namespace Ivteks72.Postman
 
             string method = request.Method;
 
-            List<PostmanHeaderSection> pHeaders = new List<PostmanHeaderSection>();
+            List<PostmanHeaderSection> pHeaders = new();
             JObject headers = JObject.Parse(GetJsonString(request.Headers).ToString());
 
 
@@ -64,7 +63,7 @@ namespace Ivteks72.Postman
             }
             #endregion
 
-            PostmanBuilder builder = new PostmanBuilder();
+            PostmanBuilder builder = new();
 
             // Construct the Request entity
             RequestContent requestContent = builder
@@ -101,7 +100,7 @@ namespace Ivteks72.Postman
             await _next(context);
         }
 
-        private async Task<string> GetBodyAsync(HttpRequest request)
+        private static async Task<string> GetBodyAsync(HttpRequest request)
         {
             //request.EnableBuffering();
             string body = string.Empty;
@@ -123,7 +122,7 @@ namespace Ivteks72.Postman
             return body;
         }
 
-        private StringBuilder GetJsonString(object model)
+        private static StringBuilder GetJsonString(object model)
         {
             string jsonString = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
@@ -136,7 +135,7 @@ namespace Ivteks72.Postman
                 }
             });
 
-            StringBuilder builder = new StringBuilder(jsonString);
+            StringBuilder builder = new(jsonString);
 
             return builder;
         }
