@@ -62,6 +62,9 @@
         <div class="container text-lg-center">
             &copy; @DateTime.Now.Year - Ivteks72 -
         </div>
+        <div class="container text-lg-right">
+            @await Html.PartialAsync("_SelectLanguagePartial")
+        </div>
     </footer>
 
     <environment names="Development">

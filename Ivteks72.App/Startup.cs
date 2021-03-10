@@ -22,6 +22,9 @@
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Http.Extensions;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using System.Globalization;
+    using Microsoft.AspNetCore.Localization;
 
     public class Startup
     {
@@ -34,6 +37,8 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization(opt => opt.ResourcesPath = "Resources");
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -89,8 +94,24 @@
             services.AddTransient<ISendGridEmailSender, EmailSender>();
 
             services.Configure<MessageSenderOptions>(Configuration);
+            CultureInfo[] supportedCultures = new[]
+            {
+                    new CultureInfo("en"),
+                    new CultureInfo("bg")
+            };
 
-            services.AddRazorPages();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders = new IRequestCultureProvider[]
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider()
+                };
+            });
+            services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -110,7 +131,7 @@
                 new RoleSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
                 new AdminSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -145,6 +166,9 @@
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRequestLocalization();
+
             app.UseAuthentication();
 
             app.UseRouting();
