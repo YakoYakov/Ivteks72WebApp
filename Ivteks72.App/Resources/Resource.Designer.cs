@@ -70,6 +70,15 @@ namespace Ivteks72.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All your clothing needs in one place.
+        /// </summary>
+        public static string Greeting {
+            get {
+                return ResourceManager.GetString("Greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {

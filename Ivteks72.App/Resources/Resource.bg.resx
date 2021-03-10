@@ -120,6 +120,9 @@
   <data name="FirmName" xml:space="preserve">
     <value>Ивтекс72</value>
   </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>Всички ваши желания на едно място</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Име</value>
   </data>

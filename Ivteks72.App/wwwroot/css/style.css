@@ -8,6 +8,14 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+.language {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-left: 1em;
+}
+
 body {
   background-color: #fff;
   color: #333;
