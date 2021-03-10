@@ -19,11 +19,17 @@
 
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
+        public DbSet<Item> Items { get; set; }
+
         public Ivteks72DbContext(DbContextOptions<Ivteks72DbContext> options) : base(options)
         {}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Item>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
             builder.Entity<Clothing>()
                 .Property(pricePerUnit => pricePerUnit.PricePerUnit)
                 .HasColumnType("decimal(18,2)");
