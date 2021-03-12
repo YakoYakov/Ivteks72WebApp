@@ -2,25 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body {
-            background-image: url("https://cdn.hipwallpaper.com/i/17/17/u5c7WI.jpg");
-            background-color: #cccccc;
-        }
-    </style>
-</head>
-<body>
-    <header class="masthead">
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Welcome To @Resource.FirmName!</div>
-                <div class="intro-heading text-uppercase">@Resource.Greeting</div>
-                <a class="btn btn-dark text-sm-center" asp-controller="Home" asp-action="About">Tell Me More About The Firm</a>
-            </div>
-        </div>
-    </header>
-</body>
-</html>
+<div>Welcome To @Resource.FirmName!</div>
+<div>@Resource.Greeting</div>
+<a class="btn btn-dark text-sm-center" asp-controller="Home" asp-action="About">Tell Me More About The Firm</a>

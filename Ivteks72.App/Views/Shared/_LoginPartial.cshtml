@@ -3,54 +3,53 @@
 @inject SignInManager<Ivteks72.Domain.ApplicationUser> SignInManager
 @inject UserManager<Ivteks72.Domain.ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-info" asp-controller="Administrator" asp-action="ViewAllInvoices" title="Admin">View all Invoices</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-info" asp-controller="Administrator" asp-action="ViewAllOrders" title="Admin">View all orders</a>
-        </li>
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-info" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello administrator @UserManager.GetUserName(User)!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-info">Logout</button>
-            </form>
-        </li>
-    }
-    else if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-info" asp-controller="Clothing" asp-action="Create">Make Order</a>
-        </li>
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-info" asp-controller="Order" asp-action="OrderIndex">View your orders</a>
-        </li>
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-info" asp-controller="Invoice" asp-action="InvoiceIndex">View your invoices</a>
-        </li>
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-info" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-info">Logout</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-info" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-info" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-    }
-    <li class="nav-item language">
-        @await Html.PartialAsync("_SelectLanguagePartial")
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <li>
+        <a asp-controller="Administrator" asp-action="ViewAllInvoices" title="Admin">View all Invoices</a>
     </li>
-</ul>
+    <li>
+        <a asp-controller="Administrator" asp-action="ViewAllOrders" title="Admin">View all orders</a>
+    </li>
+    <li>
+        <i class="ti-user"></i><a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello administrator @UserManager.GetUserName(User)!</a>
+    </li>
+    <li>
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-info">Logout</button>
+        </form>
+    </li>
+}
+else if (SignInManager.IsSignedIn(User))
+{
+    <li>
+        <a id="manage" asp-controller="Clothing" asp-action="Create">Make Order</a>
+    </li>
+    <li>
+        <a id="manage" asp-controller="Order" asp-action="OrderIndex">View your orders</a>
+    </li>
+    <li>
+        <a id="manage" asp-controller="Invoice" asp-action="InvoiceIndex">View your invoices</a>
+    </li>
+    <li>
+        <i class="ti-user"></i><a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    </li>
+    <li>
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-info">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li>
+        <i class="ti-hand-point-up"></i><a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li>
+        <i class="ti-power-off"></i><a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+<li class="nav-item language">
+    @await Html.PartialAsync("_SelectLanguagePartial")
+</li>
+
