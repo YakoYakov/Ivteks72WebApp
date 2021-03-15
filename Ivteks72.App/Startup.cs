@@ -171,8 +171,8 @@
             app.UseRequestLocalization();
 
             app.UseAuthentication();
-
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
