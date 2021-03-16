@@ -19,7 +19,7 @@
           asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
           method="post" class="form-horizontal" role="form">
         <label asp-for="@requestCulture.RequestCulture.UICulture.Name">
-            @Localizer["Language:"]
+            <i class="fa fa-language"></i>
         </label>
         <select name="culture"
                 onchange="this.form.submit();"

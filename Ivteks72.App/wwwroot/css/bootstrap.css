@@ -4913,7 +4913,7 @@ tbody.collapse.show {
     -ms-flex-direction: column;
     flex-direction: column;
     padding-left: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .list-group-item-action {
@@ -4940,7 +4940,13 @@ tbody.collapse.show {
     padding: .75rem 1.25rem;
     margin-bottom: -1px;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125)
+    border: 1px solid rgba(0, 0, 0, .125);
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -webkit-box-shadow: 0px 5px 15px #0000000a;
+    -moz-box-shadow: 0px 5px 15px #0000000a;
+    box-shadow: 0px 5px 15px #0000000a;
 }
 
 .list-group-item:first-child {
@@ -4954,10 +4960,13 @@ tbody.collapse.show {
     border-bottom-left-radius: .25rem
 }
 
-.list-group-item:focus,
-.list-group-item:hover {
-    text-decoration: none
-}
+    .list-group-item:focus,
+    .list-group-item:hover {
+        z-index: 2;
+        color: #fff;
+        background-color: #F7941D;
+        border-color: #007bff
+    }
 
 .list-group-item.disabled,
 .list-group-item:disabled {

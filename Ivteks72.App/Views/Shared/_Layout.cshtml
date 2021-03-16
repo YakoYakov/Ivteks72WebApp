@@ -31,7 +31,10 @@
                         <!-- Top Left -->
                         <div class="top-left">
                             <ul class="list-main">
+                                <li>@await Html.PartialAsync("_SelectLanguagePartial")</li>
                                 <li><i class="ti-email"></i> ivteks72@abv.bg</li>
+                                <li><i class="ti-location-pin"></i><a asp-action="About" asp-controller="Home">Store location</a></li>
+
                             </ul>
                         </div>
                         <!--/ End Top Left -->
@@ -40,7 +43,6 @@
                         <!-- Top Right -->
                         <div class="right-content">
                             <ul class="list-main">
-                                <li><i class="ti-location-pin"></i><a asp-action="About" asp-controller="Home">Store location</a></li>
                                 <partial name="_LoginPartial" />
                             </ul>
                         </div>
@@ -54,12 +56,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 col-md-2 col-12">
-
-                        <!-- Logo -->
-                        @*TODO Where to put the logo*@
-                        <a asp-action="Index" asp-controller="Home">
-                            <img style="width: 60%;" class="img-thumbnail" src="~/images/logo.png" alt="logo">
-                        </a>
 
                         <!-- Search Form -->
                         <div class="search-top">
@@ -149,7 +145,7 @@
                         <div class="col-lg-3">
                             <div class="all-category">
                                 <h3 class="cat-heading">
-                                    <i class="fa fa-user-tie" aria-hidden="true"></i>
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
                                     Categories
                                 </h3>
                             </div>
