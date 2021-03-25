@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Ivteks72.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ivteks72.Domain
 {
     public class Item
     {
         public string Id { get; set; }
+
+        public ItemType Type { get; set; }
         public string Name { get; set; }
 
         public int Quantity { get; set; }
