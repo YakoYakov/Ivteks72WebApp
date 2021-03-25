@@ -94,6 +94,7 @@
             services.AddTransient<ISendGridEmailSender, EmailSender>();
 
             services.Configure<MessageSenderOptions>(Configuration);
+
             CultureInfo[] supportedCultures = new[]
             {
                     new CultureInfo("en"),
@@ -170,8 +171,8 @@
             app.UseRequestLocalization();
 
             app.UseAuthentication();
-
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,0 +1,47 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/magnific-popup.css",
+      "wwwroot/css/font-awesome.css",
+      "wwwroot/css/jquery.fancyboc.min.css",
+      "wwwroot/css/themify-icons.css",
+      "wwwroot/css/niceselect.css",
+      "wwwroot/css/animate.css",
+      "wwwroot/css/flex-slider.min.css",
+      "wwwroot/css/owl-carousel.css",
+      "wwwroot/css/slicknav.min.css",
+      "wwwroot/css/reset.css",
+      "wwwroot/css/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/popper.min.js",
+      "wwwroot/js/bootstrap.min.js",
+      "wwwroot/js/flex-slider.js",
+      "wwwroot/js/slicknav.min.js",
+      "wwwroot/js/owl-carousel.js",
+      "wwwroot/js/magnific-popup.js",
+      "wwwroot/js/waypoints.min.js",
+      "wwwroot/js/finalcountdown.min.js",
+      "wwwroot/js/nicesellect.js",
+      "wwwroot/js/scrollup.js",
+      "wwwroot/js/onepage-nav.min.js",
+      "wwwroot/js/easing.js",
+      "wwwroot/js/facnybox.min.js",
+      //"wwwroot/js/gmap.min.js",
+      //"wwwroot/js/map-script.js",
+      "wwwroot/js/ytplayer.min.js",
+      "wwwroot/js/site.js",
+      "wwwroot/js/active.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
