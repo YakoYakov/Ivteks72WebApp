@@ -1,0 +1,52 @@
+﻿@model Ivteks72.App.Models.Item.AddItemViewModel
+
+@{ 
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+
+<h4 class="text-center">Add Finished Items to the online store.</h4>
+<hr />
+<div class="row text-center offset-3">
+    <div class="col-md-8">
+        <form asp-controller="Item" asp-action="AddNewItem" method="post" enctype="multipart/form-data" class="align-content-center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label">Item Type</label>
+                <select asp-for="Type" 
+                        asp-items="Html.GetEnumSelectList<Ivteks72.Domain.Enums.ItemType>()" class="form-control text-center">
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Item Name</label>
+                <input asp-for="Name" class="form-control text-center" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control text-center" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control text-center" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control text-center" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div>
+                <span class="text-dark">Upload item picture here</span>
+                <input class="btn btn-secondary" type="file" name="photo" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Create Item" class="btn btn-dark text-info" />
+            </div>
+        </form>
+    </div>
+</div>
