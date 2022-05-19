@@ -1,7 +1,7 @@
 ﻿namespace Ivteks72.App.Services
 {
     using System.Threading.Tasks;
-
+    using Ivteks72.Service;
     using Microsoft.Extensions.Options;
 
     using SendGrid;
@@ -9,16 +9,16 @@
 
     public class EmailSender : ISendGridEmailSender
     {
-        public EmailSender(IOptions<MessageSenderOptions> optionsAccessor)
+        private readonly IVaultService _vaultService;
+        public EmailSender(IVaultService vaultService)
         {
-            Options = optionsAccessor.Value;
+            _vaultService = vaultService;
         }
 
-        public MessageSenderOptions Options { get; } //set only via Secret Manager
-
-        public Task SendContactFormEmailAsync(string email, string subject, string message)
+        public async Task SendContactFormEmailAsync(string email, string subject, string message)
         {
-            return ContactFormEmailExecute(Options.SendGridKey, subject, message, email);
+            var key = await _vaultService.GetSecretAsStringOrDefaultAsync("SendgridKey");
+            await ContactFormEmailExecute(key, subject, message, email);
         }
 
         private Task ContactFormEmailExecute(string apiKey, string subject, string message, string email)
@@ -40,9 +40,11 @@
             return client.SendEmailAsync(msg);
         }
 
-        public Task SendConfirmatioEmailAsync(string email, string subject, string message)
+        public async Task SendConfirmatioEmailAsync(string email, string subject, string message)
         {
-            return ConfirmationEmailExecute(Options.SendGridKey, subject, message, email);
+            var key = await _vaultService.GetSecretAsStringOrDefaultAsync("SendgridKey");
+
+            await ConfirmationEmailExecute(key, subject, message, email);
         }
 
         private Task ConfirmationEmailExecute(string apiKey, string subject, string message, string email)

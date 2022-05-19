@@ -187,10 +187,7 @@
         <!--/ End Header Inner -->
     </header>
     <!--/ End Header -->
-
-
     @this.RenderBody()
-    @*<partial name="_CookieConsentPartial" />*@
 
     <!-- Start Footer Area -->
     <footer class="footer">
@@ -282,9 +279,10 @@
                 </div>
             </div>
         </div>
+        <partial name="_CookieConsentPartial" />
+
     </footer>
     <!-- /End Footer Area -->
-
     @this.RenderSection("Scripts", required: false)
 
 </body>

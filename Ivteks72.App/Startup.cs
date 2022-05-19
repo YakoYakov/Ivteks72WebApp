@@ -25,6 +25,8 @@
     using Microsoft.AspNetCore.Mvc.Razor;
     using System.Globalization;
     using Microsoft.AspNetCore.Localization;
+    using Microsoft.Extensions.Azure;
+    using Azure.Identity;
 
     public class Startup
     {
@@ -57,11 +59,11 @@
                 .AddEntityFrameworkStores<Ivteks72DbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication().AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
+            //services.AddAuthentication().AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
 
             Account cloudinaryCredentials = new Account(
                 this.Configuration["Cloudinary:CloudName"],
@@ -69,6 +71,11 @@
                 this.Configuration["Cloudinary:ApiSecret"]);
 
             Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddAzureClients(builder =>
+            {
+                builder.AddSecretClient(Configuration.GetSection("KeyVault"));
+            });
 
             services.AddSingleton(cloudinaryUtility);
 
@@ -87,13 +94,12 @@
 
             services.AddAuthorization();
 
+            services.AddSingleton<IVaultService, VaultService>();
             services.AddTransient<IClothingService, ClothingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<ISendGridEmailSender, EmailSender>();
-
-            services.Configure<MessageSenderOptions>(Configuration);
 
             CultureInfo[] supportedCultures = new[]
             {
